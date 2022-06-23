@@ -1,6 +1,6 @@
 # garage
-This is a testing space for different packages, frameworks, or libraries.
-Each subdirectory is a testing subrespository.
+This is a sandbox for different packages, frameworks, or libraries.
+Each subdirectory is a testing space for each package.
 
 ## Content
 | name                                                                     | description                                                        |
