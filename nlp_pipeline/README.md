@@ -1,5 +1,5 @@
 # NLP Pipeline
 
 ## TODO
-[ ] nlp pipeline params
+[X] nlp pipeline params
 [ ] spacy, sklearn, and nltk
