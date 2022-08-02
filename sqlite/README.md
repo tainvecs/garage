@@ -51,3 +51,10 @@
     # exit
     .exit
     ```
+
+  - create a new database from a sql script
+    - move sql commends to a sql script and create a new database by running the
+    script
+    ```bash
+    sqlite3 employee.db < init_employee.sql
+    ```
