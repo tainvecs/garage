@@ -6,3 +6,4 @@ Each subdirectory is a sandbox for each package.
 | name                                                                     | description                                                        |
 |:-------------------------------------------------------------------------|:-------------------------------------------------------------------|
 | [meilisearch](https://github.com/tainvecs/garage/tree/main/meilisearch)  | An open-source, lightning-fast, and hyper-relevant search engine.  |
+| [sqlite](https://github.com/tainvecs/garage/tree/main/sqlite)            | SQLite is a C-language library that implements a small and fast SQL database engine.  |
