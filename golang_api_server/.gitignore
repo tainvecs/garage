@@ -5,7 +5,7 @@
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
 
 # Thumbnails
 ._*
@@ -136,3 +136,6 @@ tags
 # Persistent undo
 [._]*.un~
 
+
+# Don't add .env
+*.env
