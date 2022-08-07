@@ -7,5 +7,5 @@ go mod init api-server
 
 ## TODO
 - [x] Create New a Golang Project
-- [ ] `net/http` and `github.com/gin-gonic/gin`
-- [ ] `github.com/go-gorm/gorm`
+- [ ] HTTP: `net/http` and `github.com/gin-gonic/gin`
+- [ ] Database: `github.com/go-gorm/gorm`
