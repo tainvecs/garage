@@ -42,8 +42,8 @@ class MeilisearchAPIServer():
             self.ms_doc_index = ms_doc_index
 
         # init API
-        self.add_endpoint(endpoint="/", endpoint_name="search", handler=self.search, req_methods=["GET"])
-        self.add_endpoint(endpoint="/", endpoint_name="index", handler=self.index, req_methods=["POST"])
+        self.add_endpoint(endpoint="/v1/ms/docs", endpoint_name="search", handler=self.search, req_methods=["GET"])
+        self.add_endpoint(endpoint="/v1/ms/docs", endpoint_name="index", handler=self.index, req_methods=["POST"])
 
     def run(self):
         self.app.run(debug=self.debug, port=self.port, host=self.host)
