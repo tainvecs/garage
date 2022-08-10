@@ -1,6 +1,11 @@
 # Meilisearch
 
 
+## Environment
+- macOS 12.4
+- Meilisearch 0.27.2
+
+
 ## Install
 Run the script `garage/meilisearch/scripts/install.sh` will download
 `meilisearch` binary file into `meilisearch/bin/meilisearch`.
