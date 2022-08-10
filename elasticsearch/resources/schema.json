@@ -1,0 +1,32 @@
+{
+    "settings":{
+        "index":{
+            "number_of_shards":1,
+            "number_of_replicas":1
+        }
+    },
+    "mappings":{
+        "properties":{
+            "id":{
+                "type":"keyword"
+            },
+            "title":{
+                "type":"text",
+                "analyzer":"english"
+            },
+            "content":{
+                "type":"text",
+                "analyzer":"english"
+            },
+            "created_at":{
+                "type":"date"
+            },
+            "updated_at":{
+                "type":"date"
+            },
+            "deleted_at":{
+                "type":"date"
+            }
+        }
+    }
+}
