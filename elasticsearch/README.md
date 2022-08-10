@@ -13,7 +13,7 @@ versions.
   ```bash
   cd elasticsearch
   source .env
-  ./scripts/install.sh
+  ./scripts/elasticsearch_install.sh
   ```
 
 
@@ -45,7 +45,7 @@ sampled 100 docs.
 
 ### Create an Test Index
 Run the setup script to create test index and index test data
-`scripts/test-setup.sh`.
+`./scripts/elasticsearch_test_setup.sh`.
 
 - Create a Test Index
   - `curl`
