@@ -10,7 +10,9 @@
 Run the script `garage/meilisearch/scripts/install.sh` will download
 `meilisearch` binary file into `meilisearch/bin/meilisearch`.
 ```bash
-cd meilisearch && ./scripts/install.sh
+cd meilisearch
+source .env
+./scripts/install.sh
 ```
 
 
@@ -23,16 +25,48 @@ localhost (`http://127.0.0.1:7700`).
 
 
 ## Index
-This is an example shows how to index a [movie json
-file](https://docs.meilisearch.com/movies.json) to a new `movies` index at
-`localhost`.
+The test data is available at [movie json
+file](https://docs.meilisearch.com/movies.json).
+`data/movies-100.json` sampled the first 100 docs for testing.
+- test index: `movies`
+- test index settings: `resources/movies.settings.json`
+- test data: `data/movies-100.json`
+
+Run the `scripts/meilisearch_test_setup.sh` to create the test index, update the
+settings, and index the test data.
+
+- create test index
+  ```sh
+  curl -XPOST "$MEILISEARCH_URL/indexes" \
+       -H 'Content-Type: application/json' \
+       --data-binary '{
+           "uid": "'$MEILISEARCH_INDEX'",
+           "primaryKey": "id"
+       }'
+  ```
+
+- update indexes settings
+  ```sh
+  curl -XPATCH "$MEILISEARCH_URL/indexes/$MEILISEARCH_INDEX/settings" \
+       -H 'Content-Type: application/json' \
+       -d"@$GARAGE_MEILISEARCH_ROOT/resources/movies.settings.json"
+  ```
+
+- index test docs
+  ```sh
+  curl -XPOST "$MEILISEARCH_URL/indexes/$MEILISEARCH_INDEX/documents" \
+       -H 'Content-Type: application/json' \
+       --data-binary "@$GARAGE_MEILISEARCH_ROOT/data/movies-100.json"
+  ```
+
+Alternatively, index test docs at `localhost` without creating test index with
+index settings and use default mechanism.
 
 - curl
   ```sh
-  curl \
-    -X POST 'http://localhost:7700/indexes/movies/documents' \
-    -H 'Content-Type: application/json' \
-    --data-binary @movies.json
+  curl -X POST 'http://localhost:7700/indexes/movies/documents' \
+       -H 'Content-Type: application/json' \
+       --data-binary @data/movies-100.json
   ```
 
 - python
@@ -51,21 +85,22 @@ file](https://docs.meilisearch.com/movies.json) to a new `movies` index at
   client = meilisearch.Client('http://127.0.0.1:7700')
   client.index('movies').add_documents(movies)
   ```
-  
-  
+
+
 ## Search
-Search query `botman` on example index `movies`.
+Search query `city` on example index `movies`.
+
 - curl
   ```sh
   curl \
     -X POST 'http://localhost:7700/indexes/movies/search' \
     -H 'Content-Type: application/json' \
-    --data-binary '{ "q": "botman" }'
+    --data-binary '{ "q": "city" }'
   ```
 
 - python
   ```python
-  client.index('movies').search('botman')
+  client.index('movies').search(city')
   ```
 
 
