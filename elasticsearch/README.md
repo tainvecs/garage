@@ -166,3 +166,4 @@ Run the setup script to create test index and index test data
 
 # Reference
 - [News Category Dataset](https://www.kaggle.com/datasets/rmisra/news-category-dataset)
+- [Install Elasticsearch from archive on Linux or MacOSedit](https://www.elastic.co/guide/en/elasticsearch/reference/current/targz.html#targz-running)
