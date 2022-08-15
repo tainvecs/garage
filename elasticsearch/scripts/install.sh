@@ -1,7 +1,8 @@
 GARAGE_ELASTICSEARCH_ROOT="$(dirname $(cd $(dirname $0) >/dev/null 2>&1; pwd -P;))"
 
 
-ES_VERSION=8.3.3
+# if ES_VERSION not set, use 8.3.3
+[[ -z ${ES_VERSION+x} ]] && ES_VERSION="8.3.3"
 
 
 OS_NAME=`uname`
