@@ -2,7 +2,7 @@
 This is a testing space for different packages, frameworks, or libraries.
 Each subdirectory is a sandbox for each package.
 
-## Content
+## Contents
 | name                                                                                | description                                                                          |
 |:------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------|
 | [Elasticsearch](https://github.com/tainvecs/garage/tree/main/elasticsearch)         | Elasticsearch is a distributed, RESTful search and analytics engine.                 |
