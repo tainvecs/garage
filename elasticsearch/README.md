@@ -35,6 +35,10 @@ authorization by updating
 `xpack.security.enabled` to false, and restart Elasticsearch.
 
 ## Test Elasticsearch
+The test data is forked from [News Category
+Dataset](https://www.kaggle.com/datasets/rmisra/news-category-dataset) and
+sampled 100 docs.
+
 - test index: `news_category_test`
 - test schema: `resources/test-news_category.es_schema.json`
 - test data: `data/test-news_category.es.json`
@@ -120,6 +124,37 @@ Run the setup script to create test index and index test data
         ],
         "category": "CRIME"
     }
+    ```
+
+
+### Run Test Query on the Test Index
+
+  - Get All docs
+    ```bash
+    curl -XGET "$ES_HOST/news_category_test/_search/?pretty" \
+         -H "Content-Type: application/json" \
+         -d '{
+                 "from":0,
+                 "size":'10',
+                 "query": {"match_all": {}}
+             }'
+    ```
+
+  - A Simple Keyword Search at `description` field
+    ```bash
+    curl -XGET "$ES_HOST/news_category_test/_search/?pretty" \
+         -H "Content-Type: application/json" \
+         -d '{
+                 "from":0,
+                 "size":'10',
+                 "query": {
+                     "match": {
+                         "description": {
+                             "query": "film"
+                         }
+                     }
+                 }
+             }'
     ```
 
 
