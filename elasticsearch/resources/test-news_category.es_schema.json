@@ -10,13 +10,22 @@
             "id":{
                 "type":"keyword"
             },
+            "link":{
+                "type":"keyword"
+            },
             "title":{
                 "type":"text",
                 "analyzer":"english"
             },
-            "content":{
+            "description":{
                 "type":"text",
                 "analyzer":"english"
+            },
+            "authors":{
+                "type":"keyword"
+            },
+            "category":{
+                "type":"keyword"
             },
             "created_at":{
                 "type":"date"
