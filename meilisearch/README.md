@@ -59,8 +59,7 @@ settings, and index the test data.
        --data-binary "@$GARAGE_MEILISEARCH_ROOT/data/movies-100.json"
   ```
 
-Alternatively, index test docs at `localhost` without creating test index with
-index settings and use default mechanism.
+Alternatively, index test docs at `localhost` without changing the index settings.
 
 - curl
   ```sh
