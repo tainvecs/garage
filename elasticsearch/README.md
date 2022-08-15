@@ -24,8 +24,8 @@ elasticsearch on `127.0.0.1:9200` as default.
   ./elasticsearch-<es-version>/bin/elasticsearch
   ```
 
-The first time starting Elasticsearch will generate password for the `elastic`
-built-in superuser. Following the [official
+The first time starting Elasticsearch will generate password for the
+built-in superuser, `elastic`. Following the [official
 website](https://www.elastic.co/guide/en/elasticsearch/reference/current/targz.html#targz-running)
 to setup the authentication and authorization.
 
@@ -43,7 +43,7 @@ sampled 100 docs.
 - test schema: `resources/test-news_category.es_schema.json`
 - test data: `data/test-news_category.es.json`
 
-### Create an Test Index
+### Index
 Run the setup script to create test index and index test data
 `./scripts/elasticsearch_test_setup.sh`.
 
@@ -126,8 +126,13 @@ Run the setup script to create test index and index test data
     }
     ```
 
+- Get All Index
+  ```bash
+  curl -XGET "$ES_HOST/_cat/indices?v&pretty"
+  ```
 
-### Run Test Query on the Test Index
+
+### Search
 
   - Get All docs
     ```bash
@@ -156,12 +161,6 @@ Run the setup script to create test index and index test data
                  }
              }'
     ```
-
-
-- Get All Index
-  ```bash
-  curl -XGET "$ES_HOST/_cat/indices?v&pretty"
-  ```
 
 
 # Reference
