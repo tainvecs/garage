@@ -12,6 +12,7 @@ type Document struct {
 	Title     string     `json:"title,omitempty"`
 	Content   string     `json:"content,omitempty"`
 	CreatedAt *time.Time `json:"created_at,omitempty"`
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 	DeletedAt *time.Time `json:"deleted_at,omitempty"`
 }
 
