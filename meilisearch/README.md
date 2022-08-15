@@ -78,7 +78,7 @@ Alternatively, index test docs at `localhost` without changing the index setting
   import meilisearch
   import json
 
-  json_file = open('movies.json')
+  json_file = open('movies-100.json')
   movies = json.load(json_file)
 
   client = meilisearch.Client('http://127.0.0.1:7700')
