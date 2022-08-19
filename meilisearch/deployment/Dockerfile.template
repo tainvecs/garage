@@ -1,0 +1,48 @@
+FROM --platform=%%PLATFORM_OS%%/%%DEBIAN_ARCHITECTURE%% debian:stable-slim
+
+
+LABEL maintainer="tainvecs@gmail.com"
+
+
+# args
+ARG BUILD_VERSION
+ARG BUILD_DATE
+ARG VCS_REF
+
+
+# set labels
+LABEL org.label-schema.schema-version="0.1"
+LABEL org.label-schema.build-date=$BUILD_DATE
+LABEL org.label-schema.name="meilisearch-debian"
+LABEL org.label-schema.description="Meilisearch %%MEILISEARCH_VERSION%% on Debian %%DEBIAN_ARCHITECTURE%%"
+
+LABEL org.label-schema.vcs-url="https://github.com/tainvecs/garage/tree/main/meilisearch"
+LABEL org.label-schema.vcs-ref=$VCS_REF
+LABEL org.label-schema.version=$BUILD_VERSION
+
+
+# meilisearch env
+ENV MEILI_ENV=%%MEILISEARCH_ENV%%
+ENV MEILI_DB_PATH=%%MEILISEARCH_DB_PATH%%
+ENV MEILI_HTTP_ADDR=%%MEILISEARCH_HTTP_ADDR%%
+
+
+WORKDIR /
+
+
+# install prerequisite apt apps
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y curl ca-certificates
+
+
+# download binary
+RUN curl -L \
+    -o /bin/meilisearch \
+    "https://github.com/meilisearch/meilisearch/releases/download/v%%MEILISEARCH_VERSION%%/meilisearch-%%PLATFORM_OS%%-%%MEILISEARCH_ARCHITECTURE%%"
+RUN chmod +x /bin/meilisearch
+
+
+EXPOSE 7700/tcp
+
+
+ENTRYPOINT ["/bin/bash", "-c", "meilisearch"]
