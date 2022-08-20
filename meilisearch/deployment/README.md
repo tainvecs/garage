@@ -29,10 +29,20 @@ To build your own docker image, update the arguments (if needed) and run the
 script `docker_build_local.zsh`.
 
 - Build Docker Image
+
   - Run the script `docker_build_local.zsh` to generate a new Dockerfile based on the
     arguments, and build a new Docker image.
     ```sh
     zsh docker_build_local.zsh
+    ```
+
+  - Alternatively, you can run the following command to build the image using the
+    Dockerfile in the deployment folder.
+    ```
+    docker build \
+       -f "deployment/<Dockerfile-name>" \
+       -t "meilisearch-debian:<docker-tag>" \
+       .
     ```
 
 - (Optional) Update Arguments in `docker_build_local.zsh`
@@ -60,13 +70,13 @@ script `docker_build_local.zsh`.
 
   - `DEBIAN_ARCHITECTURE`
     - available options: `amd64` and `arm64`
-    - default: `arm64`
+    - default: `amd64`
     - ([more info](https://github.com/docker-library/official-images#architectures-other-than-amd64))
 
   - `MEILISEARCH_ARCHITECTURE`
     - the architecture name of [Meilisearch Release](https://github.com/meilisearch/meilisearch/releases)
     - available options: `amd64` and `aarch64`
-    - default: `aarch64`
+    - default: `amd64`
 
 
 ## Reference
