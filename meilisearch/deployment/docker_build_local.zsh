@@ -4,7 +4,7 @@
 # ------------------------------------------------------------------------------
 # args
 #
-# DEBIAN_ARCHITECTURE: amd64, arm32v5, arm32v7, arm64v8, i386, mips64le, ppc64le, riscv64, s390x
+# DEBIAN_ARCHITECTURE: amd64, arm32/v5, arm32/v7, arm64/v8, i386, mips64le, ppc64le, riscv64, s390x
 # MEILISEARCH_ARCHITECTURE: amd64, aarch64
 # MEILISEARCH_ENV: production, development
 # ------------------------------------------------------------------------------
@@ -19,8 +19,8 @@ args_arr[MEILISEARCH_ENV]="development"
 args_arr[MEILISEARCH_HTTP_ADDR]="0.0.0.0:7700"
 args_arr[MEILISEARCH_DB_PATH]="/data.ms"
 args_arr[PLATFORM_OS]="linux"
-args_arr[DEBIAN_ARCHITECTURE]="amd64"
-args_arr[MEILISEARCH_ARCHITECTURE]="amd64"
+args_arr[DEBIAN_ARCHITECTURE]="arm64"
+args_arr[MEILISEARCH_ARCHITECTURE]="aarch64"
 
 
 VCS_REF="<VCS_REF>"
