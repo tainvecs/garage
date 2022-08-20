@@ -51,8 +51,8 @@ Run the setup script to create test index and index test data
   - `curl`
     ```bash
     curl -XPUT "$ES_HOST/$ES_INDEX_TEST" \
-    -H 'Content-Type: application/json' \
-    -d '@'"$GARAGE_ELASTICSEARCH_ROOT/resources/test-news_category.es_schema.json"
+         -H 'Content-Type: application/json' \
+         -d '@'"$GARAGE_ELASTICSEARCH_ROOT/resources/test-news_category.es_schema.json"
     ```
   - Elasticsearch Schema
     - settings
