@@ -19,8 +19,8 @@ args_arr[MEILISEARCH_ENV]="development"
 args_arr[MEILISEARCH_HTTP_ADDR]="0.0.0.0:7700"
 args_arr[MEILISEARCH_DB_PATH]="/data.ms"
 args_arr[PLATFORM_OS]="linux"
-args_arr[DEBIAN_ARCHITECTURE]="arm64"
-args_arr[MEILISEARCH_ARCHITECTURE]="aarch64"
+args_arr[DEBIAN_ARCHITECTURE]="amd64"
+args_arr[MEILISEARCH_ARCHITECTURE]="amd64"
 
 
 VCS_REF="<VCS_REF>"
