@@ -19,8 +19,8 @@ args_arr[MEILISEARCH_ENV]="development"
 args_arr[MEILISEARCH_HTTP_ADDR]="0.0.0.0:7700"
 args_arr[MEILISEARCH_DB_PATH]="/data.ms"
 args_arr[PLATFORM_OS]="linux"
-args_arr[DEBIAN_ARCHITECTURE]="arm64"
-args_arr[MEILISEARCH_ARCHITECTURE]="aarch64"
+args_arr[DEBIAN_ARCHITECTURE]="amd64"
+args_arr[MEILISEARCH_ARCHITECTURE]="amd64"
 
 
 VCS_REF="<VCS_REF>"
@@ -61,7 +61,7 @@ sed $dockerfile_var_replace_str $dockerfile_template_path > $dockerfile_path
 # docker image
 docker build \
        -f $dockerfile_path \
-       -t "tainvecs/meilisearch-debian:$dockerfile_tag" \
+       -t "meilisearch-debian:$dockerfile_tag" \
        --build-arg BUILD_VERSION="$BUILD_VERSION" \
        --build-arg BUILD_DATE="$BUILD_DATE" \
        --build-arg VCS_REF="$VCS_REF" \
