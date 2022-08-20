@@ -61,7 +61,7 @@ sed $dockerfile_var_replace_str $dockerfile_template_path > $dockerfile_path
 # docker image
 docker build \
        -f $dockerfile_path \
-       -t "tainvecs/meilisearch-debian:$dockerfile_tag" \
+       -t "meilisearch-debian:$dockerfile_tag" \
        --build-arg BUILD_VERSION="$BUILD_VERSION" \
        --build-arg BUILD_DATE="$BUILD_DATE" \
        --build-arg VCS_REF="$VCS_REF" \
