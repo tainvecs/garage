@@ -43,6 +43,9 @@ func (es *ESClient) Index(
 		log.Fatalf("Error getting response during elasticsearch Indexing: %s", err)
 		return err
 	}
+	if resp.StatusCode != 200 && resp.StatusCode != 201 {
+		return fmt.Errorf("elasticsearch index request: status code %d", resp.StatusCode)
+	}
 	defer resp.Body.Close()
 
 	return nil
@@ -65,6 +68,9 @@ func (es *ESClient) Search(
 	if err != nil {
 		log.Fatalf("Error getting the ES search response: %s", err)
 		return nil, err
+	}
+	if rawResp.StatusCode != 200 {
+		return nil, fmt.Errorf("elasticsearch search request: status code %d", rawResp.StatusCode)
 	}
 	defer rawResp.Body.Close()
 
@@ -115,7 +121,7 @@ func (es *ESClient) Update(
 	updateReq := esapi.UpdateRequest{
 		Index:      index,
 		DocumentID: docID,
-		Body:       bytes.NewReader(docData),
+		Body:       bytes.NewReader([]byte(fmt.Sprintf(`{"doc":%s}`, docData))),
 		Refresh:    "true",
 	}
 
@@ -124,6 +130,9 @@ func (es *ESClient) Update(
 	if err != nil {
 		log.Fatalf("Error getting response during elasticsearch Updating: %s", err)
 		return err
+	}
+	if resp.StatusCode != 200 {
+		return fmt.Errorf("elasticsearch update request: status code %d", resp.StatusCode)
 	}
 	defer resp.Body.Close()
 
@@ -148,6 +157,9 @@ func (es *ESClient) Delete(
 	if err != nil {
 		log.Fatalf("Error getting response during elasticsearch Deleting: %s", err)
 		return err
+	}
+	if resp.StatusCode != 200 {
+		return fmt.Errorf("elasticsearch delete request: status code %d", resp.StatusCode)
 	}
 	defer resp.Body.Close()
 
