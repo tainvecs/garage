@@ -1,4 +1,7 @@
 # Golang API Server
+This repo is a golang implementation of API server.
+Currently, it is still working in progress, and only support Elasticsearch service.
+In future, the API server might also support other services.
 
 
 ## Environment
