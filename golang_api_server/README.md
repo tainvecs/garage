@@ -1,6 +1,6 @@
 # Golang API Server
 This repo is a golang implementation of API server.
-Currently, it is still working in progress, and only support Elasticsearch service.
+Currently, it is still working in progress, and only support Elasticsearch services.
 In future, the API server might also support other services.
 
 
@@ -16,6 +16,7 @@ In future, the API server might also support other services.
   - Handler
 
 - Services
+  - Elasticsearch Search and Index Services
 
 - Data Access
   - Elasticsearch
