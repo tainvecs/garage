@@ -21,12 +21,12 @@ func TestESDAOIndex(t *testing.T) {
 	// check if env missing
 	esURL := os.Getenv("ES_URL")
 	if strings.TrimSpace(esURL) == "" {
-		panic(errors.New("Missing env ES_URL"))
+		panic(errors.New("missing env ES_URL"))
 	}
 
 	esIndexIndex := os.Getenv("ES_NEWS_DOC_INDEX_ALIAS")
 	if strings.TrimSpace(esURL) == "" {
-		panic(errors.New("Missing env ES_NEWS_DOC_INDEX_ALIAS"))
+		panic(errors.New("missing env ES_NEWS_DOC_INDEX_ALIAS"))
 	}
 
 	esSearchIndex := os.Getenv("ES_NEWS_DOC_SEARCH_ALIAS")
@@ -61,16 +61,16 @@ func TestESDAOSearch(t *testing.T) {
 	// check if env missing
 	esURL := os.Getenv("ES_URL")
 	if strings.TrimSpace(esURL) == "" {
-		panic(errors.New("Missing env ES_URL"))
+		panic(errors.New("missing env ES_URL"))
 	}
 
 	esIndexIndex := os.Getenv("ES_NEWS_DOC_INDEX_ALIAS")
-	if strings.TrimSpace(esURL) == "" {
-		panic(errors.New("Missing env ES_NEWS_DOC_INDEX_ALIAS"))
-	}
+	assert.NotEmpty(t, esIndexIndex)
 
 	esSearchIndex := os.Getenv("ES_NEWS_DOC_SEARCH_ALIAS")
-	assert.NotEmpty(t, esSearchIndex)
+	if strings.TrimSpace(esURL) == "" {
+		panic(errors.New("missing env ES_NEWS_DOC_SEARCH_ALIAS"))
+	}
 
 	// prerequisite
 	esDAO, err := NewESDAO(esURL, esIndexIndex, esSearchIndex)
@@ -98,12 +98,12 @@ func TestESDAOUpdate(t *testing.T) {
 	// check if env missing
 	esURL := os.Getenv("ES_URL")
 	if strings.TrimSpace(esURL) == "" {
-		panic(errors.New("Missing env ES_URL"))
+		panic(errors.New("missing env ES_URL"))
 	}
 
 	esIndexIndex := os.Getenv("ES_NEWS_DOC_INDEX_ALIAS")
 	if strings.TrimSpace(esURL) == "" {
-		panic(errors.New("Missing env ES_NEWS_DOC_INDEX_ALIAS"))
+		panic(errors.New("missing env ES_NEWS_DOC_INDEX_ALIAS"))
 	}
 
 	esSearchIndex := os.Getenv("ES_NEWS_DOC_SEARCH_ALIAS")
@@ -133,12 +133,12 @@ func TestESDAODelete(t *testing.T) {
 	// check if env missing
 	esURL := os.Getenv("ES_URL")
 	if strings.TrimSpace(esURL) == "" {
-		panic(errors.New("Missing env ES_URL"))
+		panic(errors.New("missing env ES_URL"))
 	}
 
 	esIndexIndex := os.Getenv("ES_NEWS_DOC_INDEX_ALIAS")
 	if strings.TrimSpace(esURL) == "" {
-		panic(errors.New("Missing env ES_NEWS_DOC_INDEX_ALIAS"))
+		panic(errors.New("missing env ES_NEWS_DOC_INDEX_ALIAS"))
 	}
 
 	esSearchIndex := os.Getenv("ES_NEWS_DOC_SEARCH_ALIAS")
