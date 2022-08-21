@@ -7,7 +7,7 @@ type NewsDoc struct {
 	Link        string     `json:"link,omitempty"`
 	Title       string     `json:"title,omitempty"`
 	Description string     `json:"description,omitempty"`
-	Authors     []*string  `json:"authors,omitempty"`
+	Authors     []string   `json:"authors,omitempty"`
 	Category    string     `json:"category,omitempty"`
 	CreatedAt   *time.Time `json:"created_at,omitempty"`
 	UpdatedAt   *time.Time `json:"updated_at,omitempty"`
