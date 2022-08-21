@@ -3,27 +3,47 @@
 
 ## Environment
 - macOS 12.0.1
-- go 1.18.3
-- elasticsearch 7.17.4
+- Go 1.18.3
+- Elasticsearch 7.17.4
+
+
+## Components
+- API
+  - Router
+  - Handler
+
+- Services
+
+- Data Access
+  - Elasticsearch
+  - PostgreSQL
 
 
 ## TODO
-- [x] Create New a Golang Project
+- [ ] Design and Documentation
+  - [ ] Architecture Diagram
+  - [ ] API Design
+  - [x] Elasticsearch Schema Design
+  - [ ] Database Schema Design
 
 - [ ] API
   - [ ] HTTP: `net/http` and `github.com/gin-gonic/gin`
-  - [ ] elasticsearch handler
+  - [ ] Elasticsearch Handler
 
 - [ ] Database: `github.com/go-gorm/gorm`
-  - [ ] SQL database test dataset, schema and setup script
-  - [ ] SQL database data access implementation
-  - [ ] SQL database data access mock test
+  - [ ] SQL Database Test Data, Schema and Setup Script
+  - [ ] SQL database Data Access Implementation
+  - [ ] SQL database Data Access Mock Test
   - [ ] service db_dao
   - [ ] service db_dao test
 
 - [ ] Elasticsearch: `github.com/elastic/go-elasticsearch/v8`
-  - [x] elasticsearch test dataset, schema and setup script
-  - [x] elasticsearch data access implementation
-  - [ ] elasticsearch data access mock test
-  - [x] service es_dao
-  - [x] service es_dao test
+  - [x] Elasticsearch Test Dataset, Schema and Setup Script
+  - [x] Elasticsearch Data Access Implementation
+  - [ ] Elasticsearch Data Access Mock Test
+  - [x] Service es_dao
+  - [x] Service es_dao Test
+
+- [ ] Deployment
+  - [ ] Dockerfile
+  - [ ] CI
