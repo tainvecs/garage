@@ -1,4 +1,4 @@
-package es_dao
+package elasticsearch_data_access
 
 import "encoding/json"
 
