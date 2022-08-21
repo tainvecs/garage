@@ -1,10 +1,33 @@
 package news_doc_service
 
-import "context"
+import (
+	"context"
+	"errors"
+	"strings"
+	"time"
+)
 
-// should check if id is empty
-// should not able to update id, createdAt, updatedAt, deletedAt
-// should auto generate updatedAt
 func (dao *ESDAO) Update(ctx context.Context, doc *NewsDoc) error {
+
+	// check if there is missing field: id
+	if strings.TrimSpace(doc.ID) == "" {
+		return errors.New("bad es update request: missing doc ID")
+	}
+
+	// check if createdAt, updatedAt, deletedAt is set
+	if doc.CreatedAt != nil {
+		return errors.New("bad es update request: created_at should not be set")
+	}
+	if doc.UpdatedAt != nil {
+		return errors.New("bad es update request: updated_at should not be set")
+	}
+	if doc.CreatedAt != nil {
+		return errors.New("bad es update request: deleted_at should not be set")
+	}
+
+	// set updated_at to now
+	t := time.Now()
+	doc.UpdatedAt = &t
+
 	return dao.Client.Update(ctx, dao.IndexIndex, doc.ID, doc)
 }
