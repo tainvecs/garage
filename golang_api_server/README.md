@@ -51,3 +51,14 @@ In future, the API server might also support other services.
 - [ ] Deployment
   - [ ] Dockerfile
   - [ ] CI
+
+
+## Reference
+
+- Elasticsearch
+  - [Language
+    Analyzer](https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-lang-analyzer.html)
+  - [Index
+    API](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-index_.html)
+  - [Go update document using
+    elasticsearch](https://stackoverflow.com/questions/71048446/go-update-document-using-elastic-search)

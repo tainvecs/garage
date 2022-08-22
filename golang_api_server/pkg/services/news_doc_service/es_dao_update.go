@@ -21,7 +21,7 @@ func (dao *ESDAO) Update(ctx context.Context, doc *NewsDoc) error {
 	if doc.UpdatedAt != nil {
 		return errors.New("bad es update request: updated_at should not be set")
 	}
-	if doc.CreatedAt != nil {
+	if doc.DeletedAt != nil {
 		return errors.New("bad es update request: deleted_at should not be set")
 	}
 
