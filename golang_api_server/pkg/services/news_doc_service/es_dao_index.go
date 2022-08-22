@@ -1,7 +1,24 @@
 package news_doc_service
 
-import "context"
+import (
+	"context"
+	"errors"
+	"strings"
+	"time"
+)
 
 func (dao *ESDAO) Index(ctx context.Context, doc *NewsDoc) error {
+
+	// check if there is missing field: id
+	if strings.TrimSpace(doc.ID) == "" {
+		return errors.New("bad es update request: missing doc ID")
+	}
+
+	// set created_at to now
+	if doc.CreatedAt == nil {
+		t := time.Now()
+		doc.CreatedAt = &t
+	}
+
 	return dao.Client.Index(ctx, dao.IndexIndex, doc.ID, doc)
 }
