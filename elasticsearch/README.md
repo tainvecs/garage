@@ -70,7 +70,7 @@ Run the setup script to create test index and index test data
       ```json
       "mappings":{
           "properties":{
-              "id":{
+              "uuid":{
                   "type":"keyword"
               },
               "link":{
