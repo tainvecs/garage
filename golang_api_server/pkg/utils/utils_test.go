@@ -29,7 +29,7 @@ func TestStringSlicesXOR(t *testing.T) {
 	// check both slice has different elements
 	assert.Equal(
 		t,
-		[]string{"3", "1"},
+		[]string{"1", "3"},
 		StringSlicesXOR([]string{"1", "2", "2", "2", "2"}, []string{"2", "3", "2"}),
 	)
 

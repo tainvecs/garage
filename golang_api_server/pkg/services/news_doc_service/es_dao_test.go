@@ -16,7 +16,7 @@ var esTestDocID = "test-doc-id"
 
 // test doc for: index, search and delete
 var esTestDoc = NewsDoc{
-	ID:          esTestDocID,
+	UUID:        esTestDocID,
 	Link:        "https://test_news_doc_1",
 	Title:       "test doc title",
 	Description: "test description",
@@ -26,7 +26,7 @@ var esTestDoc = NewsDoc{
 
 // test doc for: update
 var esUpdateTestDoc = NewsDoc{
-	ID:          esTestDocID,
+	UUID:        esTestDocID,
 	Title:       "updated doc title",
 	Description: "updated description",
 }
@@ -87,7 +87,7 @@ func TestESDAOSearch(t *testing.T) {
 	ctx := context.Background()
 	resp, err := esDAO.Search(
 		ctx,
-		`{"from":0, "size":10, "query": {"term": {"id": "`+esTestDocID+`"}}}`,
+		`{"from":0, "size":10, "query": {"term": {"uuid": "`+esTestDocID+`"}}}`,
 	)
 	assert.NoError(t, err)
 	assert.Equal(t, 1, len(resp.Results))
@@ -150,7 +150,7 @@ func TestESDAOUpdate(t *testing.T) {
 	// check update by search
 	resp, err := esDAO.Search(
 		ctx,
-		`{"from":0, "size":10, "query": {"term": {"id": "`+esTestDocID+`"}}}`,
+		`{"from":0, "size":10, "query": {"term": {"uuid": "`+esTestDocID+`"}}}`,
 	)
 	assert.NoError(t, err)
 
@@ -198,7 +198,7 @@ func TestESDAODelete(t *testing.T) {
 	// check delete by search
 	resp, err := esDAO.Search(
 		ctx,
-		`{"from":0, "size":10, "query": {"term": {"id": "`+esTestDocID+`"}}}`,
+		`{"from":0, "size":10, "query": {"term": {"uuid": "`+esTestDocID+`"}}}`,
 	)
 	assert.NoError(t, err)
 	assert.Equal(t, 0, len(resp.Results))

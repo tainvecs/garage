@@ -56,7 +56,7 @@ func rawSearchResponseToDAOSearchResponse(
 
 		// append parsed doc
 		doc := hit.Source
-		doc.ID = hit.ID
+		doc.UUID = hit.ID
 		docSlice = append(docSlice, &doc)
 		scoreSlice = append(scoreSlice, hit.Score)
 	}

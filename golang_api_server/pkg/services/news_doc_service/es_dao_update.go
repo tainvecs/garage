@@ -10,8 +10,8 @@ import (
 func (dao *ESDAO) Update(ctx context.Context, doc *NewsDoc) error {
 
 	// check if there is missing field: id
-	if strings.TrimSpace(doc.ID) == "" {
-		return errors.New("bad es update request: missing doc ID")
+	if strings.TrimSpace(doc.UUID) == "" {
+		return errors.New("bad es update request: missing doc UUID")
 	}
 
 	// check if createdAt, updatedAt, deletedAt is set
@@ -29,5 +29,5 @@ func (dao *ESDAO) Update(ctx context.Context, doc *NewsDoc) error {
 	t := time.Now()
 	doc.UpdatedAt = &t
 
-	return dao.Client.Update(ctx, dao.IndexIndex, doc.ID, doc)
+	return dao.Client.Update(ctx, dao.IndexIndex, doc.UUID, doc)
 }
