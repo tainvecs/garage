@@ -7,13 +7,13 @@ func StringSlicesXOR(ss1, ss2 []string) []string {
 	memDict := make(map[string]bool, 0)
 	resSlice := make([]string, 0)
 
-	// add ss1 elements to memDict
-	for _, s := range ss1 {
+	// add ss2 elements to memDict
+	for _, s := range ss2 {
 		memDict[s] = true
 	}
 
-	// check ss2 elements
-	for _, s := range ss2 {
+	// check ss1 elements
+	for _, s := range ss1 {
 
 		if _, exist := memDict[s]; exist {
 			memDict[s] = false
@@ -22,7 +22,7 @@ func StringSlicesXOR(ss1, ss2 []string) []string {
 		resSlice = append(resSlice, s)
 	}
 
-	// check ss1 elements
+	// check ss2 elements
 	for s, notOverlap := range memDict {
 		if notOverlap {
 			resSlice = append(resSlice, s)
