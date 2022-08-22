@@ -3,7 +3,7 @@ package news_doc_service
 import "time"
 
 type NewsDoc struct {
-	ID          string     `json:"id"`
+	UUID        string     `json:"uuid"`
 	Link        string     `json:"link,omitempty"`
 	Title       string     `json:"title,omitempty"`
 	Description string     `json:"description,omitempty"`

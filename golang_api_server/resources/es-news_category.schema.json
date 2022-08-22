@@ -160,7 +160,7 @@
     },
     "mappings":{
         "properties":{
-            "id":{
+            "uuid":{
                 "type":"keyword"
             },
             "link":{

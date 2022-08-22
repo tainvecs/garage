@@ -9,9 +9,9 @@ import (
 
 func (dao *ESDAO) Index(ctx context.Context, doc *NewsDoc) error {
 
-	// check if there is missing field: id
-	if strings.TrimSpace(doc.ID) == "" {
-		return errors.New("bad es update request: missing doc ID")
+	// check if there is missing field: uuid
+	if strings.TrimSpace(doc.UUID) == "" {
+		return errors.New("bad es update request: missing doc UUID")
 	}
 
 	// set created_at to now
@@ -20,5 +20,5 @@ func (dao *ESDAO) Index(ctx context.Context, doc *NewsDoc) error {
 		doc.CreatedAt = &t
 	}
 
-	return dao.Client.Index(ctx, dao.IndexIndex, doc.ID, doc)
+	return dao.Client.Index(ctx, dao.IndexIndex, doc.UUID, doc)
 }
