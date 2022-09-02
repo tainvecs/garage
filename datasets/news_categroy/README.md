@@ -21,8 +21,9 @@ It contains around 200k news headlines from the year 2012 to 2018 obtained from
 
 
 ## Processed Data
-- update keys' names
 - split authors string into list
+- extract news_id from url
+- update keys' names
 
 ```json
 {
