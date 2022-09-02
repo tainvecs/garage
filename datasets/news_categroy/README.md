@@ -6,6 +6,8 @@ Dataset](https://www.kaggle.com/datasets/rmisra/news-category-dataset).
 It contains around 200k news headlines from the year 2012 to 2018 obtained from
 [HuffPost](https://www.huffpost.com/).
 
+Check `process_dataset.ipynb` for data processing detail.
+
 
 ## Raw Data
 ```json
@@ -28,6 +30,7 @@ It contains around 200k news headlines from the year 2012 to 2018 obtained from
 ```json
 {
     "uuid":"8a34bbab-125a-4beb-b9b0-5b9918e83a78",
+    "news_id":"5b044625e4b0c0b8b23ec14f",
     "link":"https://www.huffingtonpost.com/entry/amazon-prime-what-to-watch_us_5b044625e4b0c0b8b23ec14f",
     "title":"What To Watch On Amazon Prime That\u2019s New This Week",
     "description":"There's a great mini-series joining this week.",
@@ -39,6 +42,7 @@ It contains around 200k news headlines from the year 2012 to 2018 obtained from
 }
 ```
 
+
 ## Processed Data for Elasticsearch Indexing
 ```json
 {
@@ -46,9 +50,9 @@ It contains around 200k news headlines from the year 2012 to 2018 obtained from
         "_id":"8a34bbab-125a-4beb-b9b0-5b9918e83a78"
     }
 }
-
 {
     "uuid":"8a34bbab-125a-4beb-b9b0-5b9918e83a78",
+    "news_id":"5b044625e4b0c0b8b23ec14f",
     "link":"https://www.huffingtonpost.com/entry/amazon-prime-what-to-watch_us_5b044625e4b0c0b8b23ec14f",
     "title":"What To Watch On Amazon Prime That\u2019s New This Week",
     "description":"There's a great mini-series joining this week.",
