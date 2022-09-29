@@ -18,7 +18,7 @@ while IFS="" read -r in_str; do
         continue
     fi
 
-    sudo fail2ban-client set sshd banip
+    sudo fail2ban-client set sshd banip $trimmed_ip_str
     echo " $i / $all_n: banned $trimmed_ip_str"
 
 done < $DENYHOST_DENY_FILE | sed -r 's/sshd:(.*)/\1/'
