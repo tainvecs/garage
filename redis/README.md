@@ -75,20 +75,126 @@ For other os, please reference [redis installation] official site.
 
 
 ## Connect to Redis
-- Command Line Interface
-```
-redis-cli
+
+### Command Line Interface
+```bash
+$ redis-cli
+
+redis 127.0.0.1:6379> ping
+PONG
 ```
 
-- Client for Different Languages
+### Client for Different Languages
+Redis clients, libraries, tools, and modules are available at [redis language clients].
+- [go-redis]
+- [redis-py]
+
+
+## Exploring Redis with the CLI
+
+### SET and GET
+```bash
+redis 127.0.0.1:6379> set mykey somevalue
+OK
+redis 127.0.0.1:6379> get mykey
+"somevalue"
+```
+
+### DEL and EXISTS
+```bash
+redis 127.0.0.1:6379> set mykey hello
+OK
+
+redis 127.0.0.1:6379> exists mykey
+(integer) 1
+
+redis 127.0.0.1:6379> del mykey
+(integer) 1
+
+redis 127.0.0.1:6379> exists mykey
+(integer) 0
+```
+
+### TYPE
+```bash
+redis 127.0.0.1:6379> set mykey x
+OK
+
+redis 127.0.0.1:6379> type mykey
+string
+
+redis 127.0.0.1:6379> del mykey
+(integer) 1
+
+redis 127.0.0.1:6379> type mykey
+none
+```
+
+### EXPIRE and TTL
+```bash
+redis 127.0.0.1:6379> set mykey some-value
+OK
+
+redis 127.0.0.1:6379> expire mykey 5
+(integer) 1
+
+redis 127.0.0.1:6379> get mykey (immediately)
+"some-value"
+
+redis 127.0.0.1:6379> get mykey (after some time)
+(nil)
+
+redis 127.0.0.1:6379> set mykey 100 ex 10
+OK
+
+redis 127.0.0.1:6379> ttl mykey
+(integer) 9
+```
+
+
+## Redis persistence
+If you start Redis with the default configuration, Redis will spontaneously save
+the dataset only from time to time (for instance after at least five minutes if
+you have at least 100 changes in your data).
+
+So if you want your database to persist and be reloaded after a restart make
+sure to call the **SAVE** command manually every time you want to force a data set snapshot.
+
+Otherwise make sure to shutdown the database using the **SHUTDOWN** command:
+
+```
+$ redis-cli shutdown
+```
+
+This way Redis will make sure to save the data on disk before quitting.
+
+Reading the **[persistence page](https://redis.io/topics/persistence)** is
+strongly suggested in order to better understand how Redis persistence works.
+
+
+## Securing Redis
+By default Redis binds to all the interfaces and has no authentication at all.
+Read [securing redis] for more info.
+
+
+## Installing Redis More Properly
+Running Redis from the command line is fine just to hack a bit or for development.
+However, at some point you'll have some actual application to run on a real server.
+Check the [redis release] and reference the guide from [installing redis more properly].
 
 
 ## Reference
 - [redis]
 - [redis installation]
+- [redis language clients]
 
 
 [brew]: https://brew.sh/
+[go-redis]: https://github.com/go-redis/redis
+[installing redis more properly]: https://redis.io/docs/getting-started/
 [redis]: https://redis.io/
 [redis installation]: https://redis.io/docs/getting-started/installation/
 [redis language clients]: https://redis.io/docs/clients/
+[redis-py]: https://github.com/redis/redis-py
+[redis release]: https://github.com/redis/redis/releases
+[securing redis]: https://redis.io/docs/getting-started/
