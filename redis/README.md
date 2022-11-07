@@ -77,7 +77,7 @@ For other os, please reference [redis installation] official site.
 ## Connect to Redis
 
 ### Command Line Interface
-```bash
+```
 $ redis-cli
 
 redis 127.0.0.1:6379> ping
@@ -93,7 +93,7 @@ Redis clients, libraries, tools, and modules are available at [redis language cl
 ## Exploring Redis with the CLI
 
 ### SET and GET
-```bash
+```
 redis 127.0.0.1:6379> set mykey somevalue
 OK
 redis 127.0.0.1:6379> get mykey
@@ -101,7 +101,7 @@ redis 127.0.0.1:6379> get mykey
 ```
 
 ### DEL and EXISTS
-```bash
+```
 redis 127.0.0.1:6379> set mykey hello
 OK
 
@@ -116,7 +116,7 @@ redis 127.0.0.1:6379> exists mykey
 ```
 
 ### TYPE
-```bash
+```
 redis 127.0.0.1:6379> set mykey x
 OK
 
@@ -131,7 +131,7 @@ none
 ```
 
 ### EXPIRE and TTL
-```bash
+```
 redis 127.0.0.1:6379> set mykey some-value
 OK
 
