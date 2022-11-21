@@ -1,6 +1,7 @@
-package news_doc_service
+package news_doc_service_test
 
 import (
+	"api-server/pkg/services/news_doc_service"
 	"api-server/pkg/utils"
 	"context"
 	"errors"
@@ -15,7 +16,7 @@ import (
 var esTestDocID = "test-doc-id"
 
 // test doc for: index, search and delete
-var esTestDoc = NewsDoc{
+var esTestDoc = news_doc_service.NewsDoc{
 	UUID:        esTestDocID,
 	Link:        "https://test_news_doc_1",
 	Title:       "test doc title",
@@ -25,13 +26,25 @@ var esTestDoc = NewsDoc{
 }
 
 // test doc for: update
-var esUpdateTestDoc = NewsDoc{
+var esUpdateTestDoc = news_doc_service.NewsDoc{
 	UUID:        esTestDocID,
 	Title:       "updated doc title",
 	Description: "updated description",
 }
 
-func TestESDAOIndex(t *testing.T) {
+func TestESDAOReal(t *testing.T) {
+
+	if os.Getenv("TEST_REAL") != "true" {
+		t.Skip()
+	}
+
+	t.Run("subtestESDAOIndexReal", subtestESDAOIndexReal)
+	t.Run("subtestESDAOSearchReal", subtestESDAOSearchReal)
+	t.Run("subTestESDAOUpdateReal", subTestESDAOUpdateReal)
+	t.Run("subTestESDAODeleteReal", subTestESDAODeleteReal)
+}
+
+func subtestESDAOIndexReal(t *testing.T) {
 
 	fmt.Println("Test services/news_doc_service/es_dao_index.go")
 	fmt.Println("> Index(ctx context.Context, doc *NewsDoc) error")
@@ -51,7 +64,7 @@ func TestESDAOIndex(t *testing.T) {
 	assert.NotEmpty(t, esSearchIndex)
 
 	// prerequisite
-	esDAO, err := NewESDAO(esURL, esIndexIndex, esSearchIndex)
+	esDAO, err := news_doc_service.NewESDAO(esURL, esIndexIndex, esSearchIndex)
 	assert.NoError(t, err)
 
 	// start indexing
@@ -60,7 +73,7 @@ func TestESDAOIndex(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-func TestESDAOSearch(t *testing.T) {
+func subtestESDAOSearchReal(t *testing.T) {
 
 	fmt.Println("Test services/news_doc_service/es_dao_search.go")
 	fmt.Println("> Search(ctx context.Context, query string) (*ESDAOSearchResponse, error)")
@@ -80,7 +93,7 @@ func TestESDAOSearch(t *testing.T) {
 	}
 
 	// prerequisite
-	esDAO, err := NewESDAO(esURL, esIndexIndex, esSearchIndex)
+	esDAO, err := news_doc_service.NewESDAO(esURL, esIndexIndex, esSearchIndex)
 	assert.NoError(t, err)
 
 	// run search to get random 10 docs
@@ -119,7 +132,7 @@ func TestESDAOSearch(t *testing.T) {
 	)
 }
 
-func TestESDAOUpdate(t *testing.T) {
+func subTestESDAOUpdateReal(t *testing.T) {
 
 	fmt.Println("Test services/news_doc_service/es_dao_update.go")
 	fmt.Println("> Update(ctx context.Context, doc *NewsDoc) error")
@@ -139,7 +152,7 @@ func TestESDAOUpdate(t *testing.T) {
 	assert.NotEmpty(t, esSearchIndex)
 
 	// prerequisite
-	esDAO, err := NewESDAO(esURL, esIndexIndex, esSearchIndex)
+	esDAO, err := news_doc_service.NewESDAO(esURL, esIndexIndex, esSearchIndex)
 	assert.NoError(t, err)
 
 	// start updating
@@ -167,7 +180,7 @@ func TestESDAOUpdate(t *testing.T) {
 	)
 }
 
-func TestESDAODelete(t *testing.T) {
+func subTestESDAODeleteReal(t *testing.T) {
 
 	fmt.Println("Test services/news_doc_service/es_dao_delete.go")
 	fmt.Println("> Delete(ctx context.Context, docID string) error")
@@ -187,7 +200,7 @@ func TestESDAODelete(t *testing.T) {
 	assert.NotEmpty(t, esSearchIndex)
 
 	// prerequisite
-	esDAO, err := NewESDAO(esURL, esIndexIndex, esSearchIndex)
+	esDAO, err := news_doc_service.NewESDAO(esURL, esIndexIndex, esSearchIndex)
 	assert.NoError(t, err)
 
 	// start deleting
