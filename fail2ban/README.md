@@ -23,7 +23,7 @@ To change the **input** or **output** file path, use arguments `--input` and `--
 
 ## Import Banned IPs to Fail2ban
 
-Run the shell script will read IPs from `resources/banned_ip_list.txt` and ban those IPs from sshd with fail2ban-client.
+Run the shell script will read IPs from `resources/banned_ip_list.txt` and ban those IPs from sshd with **fail2ban-client**.
 
 ```bash
 sh scripts/fail2ban-sshd_ban_ip_from_ip_list.zsh
