@@ -3,15 +3,15 @@ This is a testing space for different packages, frameworks, or libraries.
 Each subdirectory is a sandbox for a small testing project.
 
 
-## Implementation
+## Implementations
 
-### API Server
+### API Servers
 | name                | description                                          | keywords                  |
 |:--------------------|:-----------------------------------------------------|---------------------------|
 | [Golang API Server] | Golang API server implementation using gin and gorm. | `Elasticsearch`           |
 | [Python API Server] | Python API server implementation using Flask.        | `Flask` and `Meilisearch` |
 
-### Application
+### Applications
 | name       | description                                                                                                                                                    |
 |:-----------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [Fail2ban] | - shell scripts for banning IPs from a file with list of IPs or "denyhosts" artifact <br >- an Python script for parsing banned IP from a "denyhosts" artifact |
@@ -25,20 +25,20 @@ Each subdirectory is a sandbox for a small testing project.
 | [News Categroy] | The dataset contains around 200k news headlines from the year 2012 to 2018 obtained from [HuffPost](https://www.huffpost.com/). |
 
 
-## Note and Testing
+## Notes and Testing
 
 ### Natural Language Processing
 | name                 | description                                                         |
 |:---------------------|:--------------------------------------------------------------------|
 | [Keyword Extraction] | - Keyword extraction testing code using KeyBERT<br > - Test dataset |
 
-### Search Engine
+### Search Engines
 | name            | description                                                                                                                |
 |:----------------|:---------------------------------------------------------------------------------------------------------------------------|
 | [Elasticsearch] | - Elasticsearch installation and setup scripts<br > - Test dataset and schema                                              |
 | [Meilisearch]   | - Meilisearch installation and setup scripts<br > - Test dataset<br > - Meilisearch Dockerfiles for Debian amd64 and arm64 |
 
-### Database
+### Databases
 | name     | description                                                             |
 |:---------|:------------------------------------------------------------------------|
 | [Redis]  | Notes on Redis installation and command line.                           |
