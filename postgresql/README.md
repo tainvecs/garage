@@ -8,7 +8,7 @@
 
 ## Get Started with psql
 
-### Check your postgres version
+### Check Your Postgres Version
 
 ```bash
 postgres -V
@@ -60,7 +60,7 @@ Available **psql** connection arguments
 \d[S+]  NAME           describe table, view, sequence, or index
 ```
 
-### CREATE ROLE with psql
+### Create Role with psql
 
 Create a new user `username` and password `new_password`
 ```sql
@@ -86,3 +86,16 @@ Drop a user `username`
 ```sql
 DROP USER username;
 ```
+
+
+## Reference
+- [Setting up a PostgreSQL Database on Mac]
+- [ALTER ROLE — change a database role]
+- [Postgresql does not prompt for password]
+- [psql: FATAL: role "postgres" does not exist]
+
+
+[Setting up a PostgreSQL Database on Mac]: https://www.sqlshack.com/setting-up-a-postgresql-database-on-mac/
+[ALTER ROLE — change a database role]: https://www.postgresql.org/docs/current/sql-alterrole.html
+[psql: FATAL: role "postgres" does not exist]: https://stackoverflow.com/questions/15301826/psql-fatal-role-postgres-does-not-exist
+[Postgresql does not prompt for password]: https://stackoverflow.com/questions/1335503/postgresql-does-not-prompt-for-password
