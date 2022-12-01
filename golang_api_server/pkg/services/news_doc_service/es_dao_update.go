@@ -14,20 +14,14 @@ func (dao *ESDAO) Update(ctx context.Context, doc *NewsDoc) error {
 		return errors.New("bad es update request: missing doc UUID")
 	}
 
-	// check if createdAt, updatedAt, deletedAt is set
+	// check if createdAt, updatedAt is set
 	if doc.CreatedAt != nil {
 		return errors.New("bad es update request: created_at should not be set")
 	}
-	if doc.UpdatedAt != nil {
-		return errors.New("bad es update request: updated_at should not be set")
+	if doc.UpdatedAt == nil {
+		t := time.Now()
+		doc.UpdatedAt = &t
 	}
-	if doc.DeletedAt != nil {
-		return errors.New("bad es update request: deleted_at should not be set")
-	}
-
-	// set updated_at to now
-	t := time.Now()
-	doc.UpdatedAt = &t
 
 	return dao.Client.Update(ctx, dao.IndexIndex, doc.UUID, doc)
 }
