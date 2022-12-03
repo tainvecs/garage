@@ -1,31 +1,8 @@
 package elasticsearch_data_access
 
-import "errors"
-
-type QueryBody struct {
-	From      int           `json:"from,omitempty"`
-	Size      int           `json:"size,omitempty"`
-	MinScore  float32       `json:"min_score,omitempty"`
-	Source    Source        `json:"_source,omitempty"`
-	Query     interface{}   `json:"query"`
-	Highlight Highlight     `json:"highlight,omitempty"`
-	Aggs      interface{}   `json:"aggs,omitempty"`
-	Sort      []interface{} `json:"sort,omitempty"`
-}
-
-// Bool Query
-type BoolQuery struct {
-	Bool Bool `json:"bool"`
-}
-
-type Bool struct {
-	Filter             []interface{} `json:"filter,omitempty"`
-	MustNot            []interface{} `json:"must_not,omitempty"`
-	Must               []interface{} `json:"must,omitempty"`
-	Should             []interface{} `json:"should,omitempty"`
-	MinimumShouldMatch string        `json:"minimum_should_match,omitempty"`
-	Boost              string        `json:"boost,omitempty"`
-}
+import (
+	"errors"
+)
 
 // Term Query
 type TermQuery struct {
@@ -53,7 +30,7 @@ func NewTermQuery(field string, term Term) (*TermQuery, error) {
 	// result query
 	termQ := TermQuery{
 		map[string]Term{
-			"term": term,
+			field: term,
 		},
 	}
 
@@ -98,7 +75,7 @@ type Match struct {
 	Query     string `json:"query"`
 	Boost     string `json:"boost"`
 	Operator  string `json:"operator,omitempty"`
-	Fuzziness string `json:"fuzziness"`
+	Fuzziness string `json:"fuzziness,omitempty"`
 }
 
 func NewMatchQuery(field string, match Match) (*MatchQuery, error) {
@@ -117,7 +94,7 @@ func NewMatchQuery(field string, match Match) (*MatchQuery, error) {
 	// result query
 	matchQ := MatchQuery{
 		map[string]Match{
-			"match": match,
+			field: match,
 		},
 	}
 
@@ -151,7 +128,7 @@ func NewMatchPhraseQuery(field string, matchPhrase MatchPhrase) (*MatchPhraseQue
 	// result query
 	matchPhraseQ := MatchPhraseQuery{
 		map[string]MatchPhrase{
-			"match_phrase": matchPhrase,
+			field: matchPhrase,
 		},
 	}
 
@@ -160,12 +137,12 @@ func NewMatchPhraseQuery(field string, matchPhrase MatchPhrase) (*MatchPhraseQue
 
 // Multi Match Query
 type MultiMatchQuery struct {
-	MultiMatch map[string]MultiMatch `json:"multi_match"`
+	MultiMatch MultiMatch `json:"multi_match"`
 }
 
 type MultiMatch struct {
 	Query string   `json:"query"`
-	Type  string   `json:"type"`
+	Type  string   `json:"type,omitempty"`
 	Field []string `json:"fields"`
 }
 
@@ -175,18 +152,13 @@ func NewMultiMatchQuery(multiMatch MultiMatch) (*MultiMatchQuery, error) {
 	if len(multiMatch.Query) == 0 {
 		return nil, errors.New("NewMultiMatchQuery: missing multiMatch.Query")
 	}
-	if len(multiMatch.Type) == 0 {
-		return nil, errors.New("NewMultiMatchQuery: missing multiMatch.Type")
-	}
 	if len(multiMatch.Field) == 0 {
 		return nil, errors.New("NewMultiMatchQuery: missing multiMatch.Field")
 	}
 
 	// result query
 	multiMatchQ := MultiMatchQuery{
-		map[string]MultiMatch{
-			"multi_match": multiMatch,
-		},
+		MultiMatch: multiMatch,
 	}
 
 	return &multiMatchQ, nil
@@ -194,7 +166,7 @@ func NewMultiMatchQuery(multiMatch MultiMatch) (*MultiMatchQuery, error) {
 
 // Constant Score Query
 type ConstantScoreQuery struct {
-	ConstantScore map[string]ConstantScore `json:"constant_score"`
+	ConstantScore ConstantScore `json:"constant_score"`
 }
 
 type ConstantScore struct {
@@ -214,9 +186,7 @@ func NewConstantScoreQuery(constantScore ConstantScore) (*ConstantScoreQuery, er
 
 	// result query
 	constantScoreQ := ConstantScoreQuery{
-		map[string]ConstantScore{
-			"constant_score": constantScore,
-		},
+		ConstantScore: constantScore,
 	}
 
 	return &constantScoreQ, nil
@@ -224,7 +194,7 @@ func NewConstantScoreQuery(constantScore ConstantScore) (*ConstantScoreQuery, er
 
 // Simple Query String Query
 type SimpleQueryStringQuery struct {
-	SimpleQueryString map[string]SimpleQueryString `json:"simple_query_string"`
+	SimpleQueryString SimpleQueryString `json:"simple_query_string"`
 }
 
 type SimpleQueryString struct {
@@ -246,9 +216,7 @@ func NewSimpleQueryStringQuery(simpleQueryString SimpleQueryString) (*SimpleQuer
 
 	// result query
 	simpleQueryStringQ := SimpleQueryStringQuery{
-		map[string]SimpleQueryString{
-			"simple_query_string": simpleQueryString,
-		},
+		SimpleQueryString: simpleQueryString,
 	}
 
 	return &simpleQueryStringQ, nil
@@ -256,7 +224,7 @@ func NewSimpleQueryStringQuery(simpleQueryString SimpleQueryString) (*SimpleQuer
 
 // NestedQuery
 type NestedQuery struct {
-	Nested map[string]Nested `json:"nested"`
+	Nested Nested `json:"nested"`
 }
 
 // Nested
@@ -269,12 +237,36 @@ type Nested struct {
 func NewNestedQuery(nested Nested) (*NestedQuery, error) {
 
 	nestedQ := NestedQuery{
-		map[string]Nested{
-			"nested": nested,
-		},
+		Nested: nested,
 	}
 
 	return &nestedQ, nil
+}
+
+// Query body
+type QueryBody struct {
+	From      int           `json:"from,omitempty"`
+	Size      int           `json:"size,omitempty"`
+	MinScore  float32       `json:"min_score,omitempty"`
+	Source    Source        `json:"_source,omitempty"`
+	Query     interface{}   `json:"query"`
+	Highlight Highlight     `json:"highlight,omitempty"`
+	Aggs      interface{}   `json:"aggs,omitempty"`
+	Sort      []interface{} `json:"sort,omitempty"`
+}
+
+// Bool Query
+type BoolQuery struct {
+	Bool Bool `json:"bool"`
+}
+
+type Bool struct {
+	Filter             []interface{} `json:"filter,omitempty"`
+	MustNot            []interface{} `json:"must_not,omitempty"`
+	Must               []interface{} `json:"must,omitempty"`
+	Should             []interface{} `json:"should,omitempty"`
+	MinimumShouldMatch string        `json:"minimum_should_match,omitempty"`
+	Boost              string        `json:"boost,omitempty"`
 }
 
 // source
