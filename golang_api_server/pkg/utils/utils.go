@@ -1,5 +1,7 @@
 package utils
 
+import "regexp"
+
 // returns the elements Exclusive OR
 // (in `ss1` that are not in `ss2` or `ss2` that are not in `ss1`)
 func StringSlicesXOR(ss1, ss2 []string) []string {
@@ -30,4 +32,16 @@ func StringSlicesXOR(ss1, ss2 []string) []string {
 	}
 
 	return resSlice
+}
+
+// trim all the indent including space or line break of a string
+func StringTrimAllIndent(inStr string) (string, error) {
+
+	rgp, err := regexp.Compile(`\s`)
+	if err != nil {
+		return inStr, err
+	}
+
+	outStr := rgp.ReplaceAllString(inStr, "")
+	return outStr, nil
 }
