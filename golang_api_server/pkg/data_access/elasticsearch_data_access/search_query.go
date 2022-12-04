@@ -222,6 +222,30 @@ func NewSimpleQueryStringQuery(simpleQueryString SimpleQueryString) (*SimpleQuer
 	return &simpleQueryStringQ, nil
 }
 
+// Exists query
+type ExistsQuery struct {
+	Exists Exists `json:"exists"`
+}
+
+type Exists struct {
+	Field string `json:"field"`
+}
+
+func NewExistsQuery(exists Exists) (*ExistsQuery, error) {
+
+	// check input
+	if len(exists.Field) == 0 {
+		return nil, errors.New("NewExistsQuery: missing exists.Field")
+	}
+
+	// result query
+	existsQuery := ExistsQuery{
+		Exists: exists,
+	}
+
+	return &existsQuery, nil
+}
+
 // NestedQuery
 type NestedQuery struct {
 	Nested Nested `json:"nested"`

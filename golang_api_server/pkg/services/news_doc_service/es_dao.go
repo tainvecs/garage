@@ -2,11 +2,25 @@ package news_doc_service
 
 import (
 	"context"
+	"time"
 
 	es_data_access "api-server/pkg/data_access/elasticsearch_data_access"
 
 	"github.com/elastic/go-elasticsearch/v8"
 )
+
+// data element
+type NewsDoc struct {
+	UUID        string     `json:"uuid"`
+	Link        string     `json:"link,omitempty"`
+	Title       string     `json:"title,omitempty"`
+	Description string     `json:"description,omitempty"`
+	Authors     []string   `json:"authors,omitempty"`
+	Category    string     `json:"category,omitempty"`
+	CreatedAt   *time.Time `json:"created_at,omitempty"`
+	UpdatedAt   *time.Time `json:"updated_at,omitempty"`
+	DeletedAt   *time.Time `json:"deleted_at,omitempty"`
+}
 
 // ES data access object interface
 type esDAO interface {
