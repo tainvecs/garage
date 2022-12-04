@@ -18,7 +18,6 @@ type SearchResponse struct {
 }
 
 type SearchResponseDoc struct {
-	UUID        string   `json:"uuid"`
 	Link        string   `json:"link"`
 	Title       string   `json:"title"`
 	Description string   `json:"description"`
@@ -66,7 +65,6 @@ func NewSearchFunc(esDAO esDAO) SearchFunc {
 			response.Docs = append(
 				response.Docs,
 				&SearchResponseDoc{
-					UUID:        d.UUID,
 					Link:        d.Link,
 					Title:       d.Title,
 					Description: d.Description,
