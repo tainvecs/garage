@@ -1,20 +1,19 @@
 package news_doc_service_test
 
 import (
-	"api-server/pkg/data_access/elasticsearch_data_access"
 	"api-server/pkg/services/news_doc_service"
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"os"
 	"strings"
 	"testing"
-	"time"
 
 	"github.com/stretchr/testify/assert"
 )
 
-var esSearchTestDoc = news_doc_service.NewsDoc{
+var searchAPITestDoc = news_doc_service.NewsDoc{
 	UUID:        "test-doc-id-1",
 	Link:        "https://test_news_doc_1",
 	Title:       "test doc title 1",
@@ -23,25 +22,14 @@ var esSearchTestDoc = news_doc_service.NewsDoc{
 	Category:    "CATEGORIY",
 }
 
-var softDeletedTime = time.Now()
-var esSearchTestDocSoftDeleted = news_doc_service.NewsDoc{
-	UUID:        "test-doc-id-2",
-	Link:        "https://test_news_doc_2",
-	Title:       "test doc title 2",
-	Description: "test description 2",
-	Authors:     []string{"a3", "a4"},
-	Category:    "CATEGORIY",
-	DeletedAt:   &softDeletedTime,
-}
-
-func TestBuildESSearchQuery(t *testing.T) {
+func TestNewSearchFunc(t *testing.T) {
 
 	if os.Getenv("TEST_REAL") != "true" {
 		t.Skip()
 	}
 
-	fmt.Println("Test services/news_doc_service/search_logic_es.go")
-	fmt.Println("> BuildESSearchQuery(params *ESSearchParameters) (*elasticsearch_data_access.QueryBody, error)")
+	fmt.Println("Test services/news_doc_service/search_logic_api.go")
+	fmt.Println("> NewSearchFunc(esDAO *ESDAO) SearchFunc func(ctx context.Context, request *SearchRequest) (*SearchResponse, error)")
 
 	// check if env missing
 	esURL := os.Getenv("ES_URL")
@@ -61,6 +49,8 @@ func TestBuildESSearchQuery(t *testing.T) {
 	esDAO, err := news_doc_service.NewESDAO(esURL, esIndexIndex, esSearchIndex)
 	assert.NoError(t, err)
 
+	searchFunc := news_doc_service.NewSearchFunc(esDAO)
+
 	// start test data indexing
 	ctx := context.Background()
 
@@ -69,30 +59,23 @@ func TestBuildESSearchQuery(t *testing.T) {
 	err = esDAO.Index(ctx, &esSearchTestDocSoftDeleted)
 	assert.NoError(t, err)
 
-	// start testing search
-	params := news_doc_service.ESSearchParameters{
+	// start testing
+	request := news_doc_service.SearchRequest{
 		Query: "test description | test title",
 		Page:  0,
 		Limit: 10,
 	}
-	searchQuery, err := news_doc_service.BuildESSearchQuery(&params)
+	resp, err := searchFunc(ctx, &request)
 	assert.NoError(t, err)
-
-	searchQueryStr, err := elasticsearch_data_access.ESQueryToString(searchQuery)
-	assert.NoError(t, err)
-
-	resp, err := esDAO.Search(ctx, searchQueryStr)
-	assert.NoError(t, err)
-	assert.Equal(t, 1, len(resp.Results))
-	assert.Equal(
-		t,
-		resp.Results[0].UUID,
-		esSearchTestDoc.UUID,
-	)
 
 	// clean up by delete test data
 	err = esDAO.Delete(ctx, esSearchTestDoc.UUID)
 	assert.NoError(t, err)
 	err = esDAO.Delete(ctx, esSearchTestDocSoftDeleted.UUID)
 	assert.NoError(t, err)
+
+	// print debug
+	mar, err := json.MarshalIndent(resp, "", "\t")
+	assert.NoError(t, err)
+	fmt.Println(string(mar))
 }
