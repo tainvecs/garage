@@ -15,7 +15,7 @@ import (
 )
 
 var esSearchTestDoc = news_doc_service.NewsDoc{
-	UUID:        "test-doc-id",
+	UUID:        "test-doc-id-1",
 	Link:        "https://test_news_doc_1",
 	Title:       "test doc title 1",
 	Description: "test description 1",
@@ -25,7 +25,7 @@ var esSearchTestDoc = news_doc_service.NewsDoc{
 
 var softDeletedTime = time.Now()
 var esSearchTestDocSoftDeleted = news_doc_service.NewsDoc{
-	UUID:        "test-doc-id",
+	UUID:        "test-doc-id-2",
 	Link:        "https://test_news_doc_2",
 	Title:       "test doc title 2",
 	Description: "test description 2",
@@ -61,7 +61,7 @@ func TestBuildESSearchQuery(t *testing.T) {
 	esDAO, err := news_doc_service.NewESDAO(esURL, esIndexIndex, esSearchIndex)
 	assert.NoError(t, err)
 
-	// start indexing
+	// start test data indexing
 	ctx := context.Background()
 
 	err = esDAO.Index(ctx, &esSearchTestDoc)
@@ -70,7 +70,7 @@ func TestBuildESSearchQuery(t *testing.T) {
 	err = esDAO.Index(ctx, &esSearchTestDocSoftDeleted)
 	assert.NoError(t, err)
 
-	// start search test
+	// start testing search
 	params := news_doc_service.ESSearchParameters{
 		Query: "test description | test title",
 		Page:  0,
@@ -85,11 +85,15 @@ func TestBuildESSearchQuery(t *testing.T) {
 	resp, err := esDAO.Search(ctx, searchQueryStr)
 	assert.NoError(t, err)
 	assert.Equal(t, 1, len(resp.Results))
-
-	// check if result correct
 	assert.Equal(
 		t,
 		resp.Results[0].UUID,
-		esSearchTestDocSoftDeleted.UUID,
+		esSearchTestDoc.UUID,
 	)
+
+	// clean up by delete test data
+	err = esDAO.Delete(ctx, esSearchTestDoc.UUID)
+	assert.NoError(t, err)
+	err = esDAO.Delete(ctx, esSearchTestDocSoftDeleted.UUID)
+	assert.NoError(t, err)
 }
