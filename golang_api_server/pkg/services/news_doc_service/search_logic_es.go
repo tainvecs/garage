@@ -16,10 +16,21 @@ func BuildESSearchQuery(params *ESSearchParameters) (*elasticsearch_data_access.
 	// bool query
 	boolQuery := elasticsearch_data_access.BoolQuery{
 		Bool: elasticsearch_data_access.Bool{
+			MustNot:            make([]interface{}, 0),
 			Should:             make([]interface{}, 0),
 			MinimumShouldMatch: "1",
 		},
 	}
+
+	// filter soft deleted docs
+	exists := elasticsearch_data_access.Exists{
+		Field: "deleted_at",
+	}
+	existsQuery, err := elasticsearch_data_access.NewExistsQuery(exists)
+	if err != nil {
+		return nil, err
+	}
+	boolQuery.Bool.MustNot = append(boolQuery.Bool.MustNot, existsQuery)
 
 	// simple query string query
 	simpleQueryString := elasticsearch_data_access.SimpleQueryString{
@@ -34,7 +45,6 @@ func BuildESSearchQuery(params *ESSearchParameters) (*elasticsearch_data_access.
 	if err != nil {
 		return nil, err
 	}
-
 	boolQuery.Bool.Should = append(boolQuery.Bool.Should, simpleQueryStringQuery)
 
 	// result query
