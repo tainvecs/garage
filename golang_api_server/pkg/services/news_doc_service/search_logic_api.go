@@ -1,8 +1,8 @@
 package news_doc_service
 
 import (
+	"api-server/pkg/data_access/elasticsearch_data_access"
 	"context"
-	"encoding/json"
 )
 
 // api request and response
@@ -49,8 +49,7 @@ func NewSearchFunc(esDAO *ESDAO) SearchFunc {
 		}
 
 		// run es search
-		mar, err := json.Marshal(esSearchQuery)
-		esSearchQueryStr := string(mar)
+		esSearchQueryStr, err := elasticsearch_data_access.ESQueryToString(esSearchQuery)
 		if err != nil {
 			return &response, err
 		}
