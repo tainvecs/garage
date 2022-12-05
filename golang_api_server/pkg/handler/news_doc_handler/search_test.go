@@ -1,4 +1,4 @@
-package news_doc_api_test
+package news_doc_handler_test
 
 import (
 	"context"
@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"api-server/pkg/api/news_doc_api"
+	"api-server/pkg/handler/news_doc_handler"
 	"api-server/pkg/services/news_doc_service"
 
 	"github.com/stretchr/testify/assert"
@@ -42,7 +42,7 @@ func TestNewSearchFunc(t *testing.T) {
 		t.Skip()
 	}
 
-	fmt.Println("Test api/news_docs_api/search_logic_api.go")
+	fmt.Println("Test api/news_doc_handler/search.go")
 	fmt.Println("> NewSearchFunc(esDAO *ESDAO) SearchFunc func(ctx context.Context, request *SearchRequest) (*SearchResponse, error)")
 
 	// check if env missing
@@ -63,7 +63,7 @@ func TestNewSearchFunc(t *testing.T) {
 	esDAO, err := news_doc_service.NewESDAO(esURL, esIndexIndex, esSearchIndex)
 	assert.NoError(t, err)
 
-	searchFunc := news_doc_api.NewSearchFunc(esDAO)
+	searchFunc := news_doc_handler.NewSearchFunc(esDAO)
 
 	// start test data indexing
 	ctx := context.Background()
@@ -74,7 +74,7 @@ func TestNewSearchFunc(t *testing.T) {
 	assert.NoError(t, err)
 
 	// start testing
-	request := news_doc_api.SearchRequest{
+	request := news_doc_handler.SearchRequest{
 		Query: "test description | test title",
 		Page:  0,
 		Limit: 10,

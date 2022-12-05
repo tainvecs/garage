@@ -1,4 +1,4 @@
-package news_doc_api
+package news_doc_handler
 
 import (
 	"context"
