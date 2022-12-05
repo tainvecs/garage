@@ -14,7 +14,7 @@ type ESDAOSearchResponse struct {
 	Scores  []float32
 }
 
-func (dao *ESDAO) Search(ctx context.Context, query string) (*ESDAOSearchResponse, error) {
+func (dao *esDAO) Search(ctx context.Context, query string) (*ESDAOSearchResponse, error) {
 
 	// run es search
 	rawResp, err := dao.Client.Search(ctx, dao.SearchIndex, query)

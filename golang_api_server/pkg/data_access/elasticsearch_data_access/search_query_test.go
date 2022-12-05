@@ -1,10 +1,11 @@
 package elasticsearch_data_access_test
 
 import (
-	"api-server/pkg/data_access/elasticsearch_data_access"
-	"api-server/pkg/utils"
 	"fmt"
 	"testing"
+
+	"api-server/pkg/data_access/elasticsearch_data_access"
+	"api-server/pkg/utils"
 
 	"github.com/stretchr/testify/assert"
 )

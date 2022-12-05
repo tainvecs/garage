@@ -1,8 +1,10 @@
-package news_doc_service
+package news_doc_api
 
 import (
-	"api-server/pkg/data_access/elasticsearch_data_access"
 	"context"
+
+	"api-server/pkg/data_access/elasticsearch_data_access"
+	"api-server/pkg/services/news_doc_service"
 )
 
 // api request and response
@@ -28,7 +30,7 @@ type SearchResponseDoc struct {
 // api handling function
 type SearchFunc func(ctx context.Context, request *SearchRequest) (*SearchResponse, error)
 
-func NewSearchFunc(esDAO esDAO) SearchFunc {
+func NewSearchFunc(ESDAO news_doc_service.ESDAO) SearchFunc {
 	return func(ctx context.Context, request *SearchRequest) (*SearchResponse, error) {
 
 		response := SearchResponse{
@@ -37,12 +39,12 @@ func NewSearchFunc(esDAO esDAO) SearchFunc {
 		}
 
 		// build es search query
-		esSearchParams := ESSearchParameters{
+		esSearchParams := news_doc_service.ESSearchParameters{
 			Query: request.Query,
 			Page:  request.Page,
 			Limit: request.Limit,
 		}
-		esSearchQuery, err := BuildESSearchQuery(&esSearchParams)
+		esSearchQuery, err := news_doc_service.BuildESSearchQuery(&esSearchParams)
 		if err != nil {
 			return &response, err
 		}
@@ -53,7 +55,7 @@ func NewSearchFunc(esDAO esDAO) SearchFunc {
 			return &response, err
 		}
 
-		searchResp, err := esDAO.Search(ctx, esSearchQueryStr)
+		searchResp, err := ESDAO.Search(ctx, esSearchQueryStr)
 		if err != nil {
 			return &response, err
 		}
