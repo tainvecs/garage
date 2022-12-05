@@ -63,11 +63,10 @@ func TestNewSearchFunc(t *testing.T) {
 	esDAO, err := news_doc_service.NewESDAO(esURL, esIndexIndex, esSearchIndex)
 	assert.NoError(t, err)
 
+	ctx := context.Background()
 	searchFunc := news_doc_handler.NewSearchFunc(esDAO)
 
 	// start test data indexing
-	ctx := context.Background()
-
 	err = esDAO.Index(ctx, &esSearchTestDoc)
 	assert.NoError(t, err)
 	err = esDAO.Index(ctx, &esSearchTestDocSoftDeleted)
