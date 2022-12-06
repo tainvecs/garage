@@ -1,4 +1,4 @@
-package router
+package server
 
 import (
 	"api-server/pkg/handler"
