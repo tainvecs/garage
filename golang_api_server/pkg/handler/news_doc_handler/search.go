@@ -30,7 +30,7 @@ type SearchResponseDoc struct {
 // api handling function
 type SearchFunc func(ctx context.Context, request *SearchRequest) (*SearchResponse, error)
 
-func NewSearchFunc(esDAO news_doc_service.ESDAO) SearchFunc {
+func NewSearchFunc(esDAO news_doc_service.NewDocESDAO) SearchFunc {
 	return func(ctx context.Context, request *SearchRequest) (*SearchResponse, error) {
 
 		response := SearchResponse{

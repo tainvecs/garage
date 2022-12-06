@@ -3,23 +3,27 @@ package news_doc_handler
 import (
 	"net/http"
 
+	es_data_access "api-server/pkg/data_access/elasticsearch_data_access"
 	"api-server/pkg/middleware"
 	"api-server/pkg/services/news_doc_service"
 
 	"github.com/gin-gonic/gin"
 )
 
-type NewsDocHandler struct {
+type Handler struct {
 	SearchFunc SearchFunc
 }
 
-func NewNewsDocHandler(esDAO news_doc_service.ESDAO) *NewsDocHandler {
-	return &NewsDocHandler{
-		SearchFunc: NewSearchFunc(esDAO),
+func NewHandler(esDAO es_data_access.ESDAO) *Handler {
+
+	newsDocESDAO := news_doc_service.NewNewsDocESDAO(esDAO)
+
+	return &Handler{
+		SearchFunc: NewSearchFunc(newsDocESDAO),
 	}
 }
 
-func (h *NewsDocHandler) GetSearch() gin.HandlerFunc {
+func (h *Handler) GetSearch() gin.HandlerFunc {
 
 	return func(c *gin.Context) {
 

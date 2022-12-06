@@ -5,8 +5,6 @@ import (
 	"time"
 
 	es_data_access "api-server/pkg/data_access/elasticsearch_data_access"
-
-	"github.com/elastic/go-elasticsearch/v8"
 )
 
 // data element
@@ -23,7 +21,7 @@ type NewsDoc struct {
 }
 
 // ES data access object interface
-type ESDAO interface {
+type NewDocESDAO interface {
 	Index(ctx context.Context, doc *NewsDoc) error
 	Search(ctx context.Context, query string) (*ESDAOSearchResponse, error)
 	Update(ctx context.Context, doc *NewsDoc) error
@@ -31,29 +29,16 @@ type ESDAO interface {
 }
 
 // ES data access object
-type esDAO struct {
+type newsDocESDAO struct {
 	Client      *es_data_access.ESClient
 	IndexIndex  string
 	SearchIndex string
 }
 
-func NewESDAO(esURL, esIndexIndex, esSearchIndex string) (ESDAO, error) {
-
-	// new elasticsearch client
-	cfg := elasticsearch.Config{
-		Addresses: []string{esURL},
+func NewNewsDocESDAO(esDAO es_data_access.ESDAO) NewDocESDAO {
+	return &newsDocESDAO{
+		Client:      esDAO.Client,
+		IndexIndex:  esDAO.IndexIndex,
+		SearchIndex: esDAO.SearchIndex,
 	}
-	client, err := elasticsearch.NewClient(cfg)
-	if err != nil {
-		return nil, err
-	}
-
-	// new DAO
-	dao := esDAO{
-		Client:      &es_data_access.ESClient{Client: client},
-		IndexIndex:  esIndexIndex,
-		SearchIndex: esSearchIndex,
-	}
-
-	return &dao, nil
 }
