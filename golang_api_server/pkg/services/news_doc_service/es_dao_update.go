@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-func (dao *esDAO) Update(ctx context.Context, doc *NewsDoc) error {
+func (dao *newsDocESDAO) Update(ctx context.Context, doc *NewsDoc) error {
 
 	// check if there is missing field: id
 	if strings.TrimSpace(doc.UUID) == "" {

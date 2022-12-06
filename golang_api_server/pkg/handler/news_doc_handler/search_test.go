@@ -10,6 +10,7 @@ import (
 	"testing"
 	"time"
 
+	es_data_access "api-server/pkg/data_access/elasticsearch_data_access"
 	"api-server/pkg/handler/news_doc_handler"
 	"api-server/pkg/services/news_doc_service"
 
@@ -36,6 +37,35 @@ var esSearchTestDocSoftDeleted = news_doc_service.NewsDoc{
 	DeletedAt:   &softDeletedTime,
 }
 
+func InitESDAO() (news_doc_service.NewDocESDAO, error) {
+
+	// check if env missing
+	esURL := os.Getenv("ES_URL")
+	if strings.TrimSpace(esURL) == "" {
+		return nil, errors.New("missing env ES_URL")
+	}
+
+	esIndexIndex := os.Getenv("ES_NEWS_DOC_INDEX_ALIAS")
+	if strings.TrimSpace(esURL) == "" {
+		return nil, errors.New("missing env ES_NEWS_DOC_INDEX_ALIAS")
+	}
+
+	esSearchIndex := os.Getenv("ES_NEWS_DOC_SEARCH_ALIAS")
+	if len(esSearchIndex) == 0 {
+		return nil, errors.New("missing env ES_NEWS_DOC_SEARCH_ALIAS")
+	}
+
+	// es dao
+	rawESDAO, err := es_data_access.NewESDAO(esURL, esIndexIndex, esSearchIndex)
+	if err != nil {
+		return nil, err
+	}
+
+	esDAO := news_doc_service.NewNewsDocESDAO(*rawESDAO)
+
+	return esDAO, nil
+}
+
 func TestNewSearchFunc(t *testing.T) {
 
 	if os.Getenv("TEST_REAL") != "true" {
@@ -45,22 +75,8 @@ func TestNewSearchFunc(t *testing.T) {
 	fmt.Println("Test api/news_doc_handler/search.go")
 	fmt.Println("> NewSearchFunc(esDAO *ESDAO) SearchFunc func(ctx context.Context, request *SearchRequest) (*SearchResponse, error)")
 
-	// check if env missing
-	esURL := os.Getenv("ES_URL")
-	if strings.TrimSpace(esURL) == "" {
-		panic(errors.New("missing env ES_URL"))
-	}
-
-	esIndexIndex := os.Getenv("ES_NEWS_DOC_INDEX_ALIAS")
-	if strings.TrimSpace(esURL) == "" {
-		panic(errors.New("missing env ES_NEWS_DOC_INDEX_ALIAS"))
-	}
-
-	esSearchIndex := os.Getenv("ES_NEWS_DOC_SEARCH_ALIAS")
-	assert.NotEmpty(t, esSearchIndex)
-
 	// prerequisite
-	esDAO, err := news_doc_service.NewESDAO(esURL, esIndexIndex, esSearchIndex)
+	esDAO, err := InitESDAO()
 	assert.NoError(t, err)
 
 	ctx := context.Background()
