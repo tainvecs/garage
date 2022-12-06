@@ -34,6 +34,7 @@ func (h *Handler) GetSearch() gin.HandlerFunc {
 				http.StatusBadRequest,
 				middleware.NewErrorResponse(err),
 			)
+			return
 		}
 
 		// process request
@@ -46,6 +47,7 @@ func (h *Handler) GetSearch() gin.HandlerFunc {
 				http.StatusInternalServerError,
 				middleware.NewErrorResponse(err),
 			)
+			return
 		}
 
 		// response
