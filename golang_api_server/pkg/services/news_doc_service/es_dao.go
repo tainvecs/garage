@@ -23,7 +23,7 @@ type NewsDoc struct {
 }
 
 // ES data access object interface
-type esDAO interface {
+type ESDAO interface {
 	Index(ctx context.Context, doc *NewsDoc) error
 	Search(ctx context.Context, query string) (*ESDAOSearchResponse, error)
 	Update(ctx context.Context, doc *NewsDoc) error
@@ -31,13 +31,13 @@ type esDAO interface {
 }
 
 // ES data access object
-type ESDAO struct {
+type esDAO struct {
 	Client      *es_data_access.ESClient
 	IndexIndex  string
 	SearchIndex string
 }
 
-func NewESDAO(esURL, esIndexIndex, esSearchIndex string) (esDAO, error) {
+func NewESDAO(esURL, esIndexIndex, esSearchIndex string) (ESDAO, error) {
 
 	// new elasticsearch client
 	cfg := elasticsearch.Config{
@@ -49,7 +49,7 @@ func NewESDAO(esURL, esIndexIndex, esSearchIndex string) (esDAO, error) {
 	}
 
 	// new DAO
-	dao := ESDAO{
+	dao := esDAO{
 		Client:      &es_data_access.ESClient{Client: client},
 		IndexIndex:  esIndexIndex,
 		SearchIndex: esSearchIndex,
