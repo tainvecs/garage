@@ -59,8 +59,7 @@ func TestStringTrimAllIndent(t *testing.T) {
       }
     }
     `
-	// ansStr := `{"query":{"term":{"user.id":{"value":"kimchy","boost":1.0}}}}`
-	ansStr := ``
+	ansStr := `{"query":{"term":{"user.id":{"value":"kimchy","boost":1.0}}}}`
 
 	resStr, err := utils.StringTrimAllIndent(testStr)
 	assert.NoError(t, err)

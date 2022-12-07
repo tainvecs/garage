@@ -40,11 +40,18 @@ jobs:
         go version
         go install golang.org/x/lint/golint@latest
 
-    - name: Run vet & lint
+    - name: Run go vet
       run: |
         go vet ./...
-        golint ./...
 
     - name: Run Unit Test
       run: |
         go test -v ./...
+
+    - name: Run golint
+      run: |
+        golint ./...
+
+    - name: Run gofmt
+      run: |
+        go fmt ./...
