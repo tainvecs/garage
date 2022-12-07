@@ -46,7 +46,7 @@ jobs:
 
     - name: Run gofmt
       run: |
-        bash scripts/go-fmt.sh
+        bash scripts/go-fmt-check-format.sh
 
     - name: Run Unit Test
       run: |
