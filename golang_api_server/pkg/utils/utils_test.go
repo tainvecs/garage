@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestStringSlicesXOR(t *testing.T) {
+unc TestStringSlicesXOR(t *testing.T) {
 
 	fmt.Println("Test utils/utils.go")
 	fmt.Println("> StringSlicesXOR(ss1, ss2 []string) []string")
