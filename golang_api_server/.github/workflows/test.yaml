@@ -1,0 +1,45 @@
+name: Test
+
+
+on:
+  push:
+    branches:
+      - "**"
+      - "!staging"
+  pull_request:
+    branches:
+      - "**"
+      - "!staging"
+
+
+jobs:
+  test:
+
+    strategy:
+      matrix:
+        go-version: [1.19.x]  # [1.18.x, 1.19.x]
+        os: [ubuntu-latest]   # [ubuntu-latest, macos-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: ${{ matrix.go-version }}
+
+    - name: Install Dependencies
+      run: |
+        go version
+        go get -u golang.org/x/lint/golint
+
+    - name: Run vet & lint
+      run: |
+        go vet ./...
+        golint ./...
+
+    - name: Run Unit Test
+      run: |
+        go test -v ./...
