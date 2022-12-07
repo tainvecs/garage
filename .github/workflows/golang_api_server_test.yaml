@@ -54,4 +54,4 @@ jobs:
 
     - name: Run gofmt
       run: |
-        go fmt ./...
+        bash scripts/go-fmt.sh
