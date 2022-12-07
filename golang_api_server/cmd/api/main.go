@@ -12,7 +12,7 @@ func main() {
 
 	// read env
 	esURL := os.Getenv("ES_URL")
-	 esIndexIndex := os.Getenv("ES_NEWS_DOC_INDEX_ALIAS")
+	esIndexIndex := os.Getenv("ES_NEWS_DOC_INDEX_ALIAS")
 	esSearchIndex := os.Getenv("ES_NEWS_DOC_SEARCH_ALIAS")
 
 	// init dao

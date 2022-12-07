@@ -44,6 +44,10 @@ jobs:
       run: |
         go vet ./...
 
+    - name: Run gofmt
+      run: |
+        bash scripts/go-fmt.sh
+
     - name: Run Unit Test
       run: |
         go test -v ./...
@@ -51,7 +55,3 @@ jobs:
     - name: Run golint
       run: |
         golint ./...
-
-    - name: Run gofmt
-      run: |
-        bash scripts/go-fmt.sh
