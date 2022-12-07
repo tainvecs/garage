@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-unc TestStringSlicesXOR(t *testing.T) {
+func TestStringSlicesXOR(t *testing.T) {
 
 	fmt.Println("Test utils/utils.go")
 	fmt.Println("> StringSlicesXOR(ss1, ss2 []string) []string")
@@ -59,7 +59,8 @@ func TestStringTrimAllIndent(t *testing.T) {
       }
     }
     `
-	ansStr := `{"query":{"term":{"user.id":{"value":"kimchy","boost":1.0}}}}`
+	// ansStr := `{"query":{"term":{"user.id":{"value":"kimchy","boost":1.0}}}}`
+	ansStr := ``
 
 	resStr, err := utils.StringTrimAllIndent(testStr)
 	assert.NoError(t, err)
