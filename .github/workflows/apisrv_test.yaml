@@ -6,6 +6,9 @@ on:
     branches:
       - "apisrv/test-workflow"
 
+  pull_request:
+    branches:
+      - "apisrv**"
 
 defaults:
   run:
