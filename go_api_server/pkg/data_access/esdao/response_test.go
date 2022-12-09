@@ -1,11 +1,11 @@
 package esdao_test
 
 import (
-	"apisrv/pkg/data_access/esdao"
-	"apisrv/pkg/utils/strutils"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/tainvecs/apisrv/pkg/data_access/esdao"
+	"github.com/tainvecs/apisrv/pkg/utils/strutils"
 )
 
 func TestRawSearchResponse(t *testing.T) {

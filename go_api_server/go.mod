@@ -1,4 +1,4 @@
-module apisrv
+module github.com/tainvecs/apisrv
 
 go 1.19
 

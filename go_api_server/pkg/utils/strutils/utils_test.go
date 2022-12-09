@@ -1,10 +1,10 @@
 package strutils_test
 
 import (
-	"apisrv/pkg/utils/strutils"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/tainvecs/apisrv/pkg/utils/strutils"
 )
 
 func TestStringSlicesXOR(t *testing.T) {

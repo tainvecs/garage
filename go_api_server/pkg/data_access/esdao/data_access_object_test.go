@@ -1,13 +1,13 @@
 package esdao_test
 
 import (
-	"apisrv/pkg/data_access/esdao"
 	"context"
 	"os"
 	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/tainvecs/apisrv/pkg/data_access/esdao"
 )
 
 type testDoc struct {
