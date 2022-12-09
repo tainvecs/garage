@@ -1,7 +1,7 @@
 # Go API Server
 
 <div>
-  <a href="https://github.com/tainvecs/garage/tree/main/apisrv" >
+  <a href="https://codecov.io/github/tainvecs/garage" >
     <img src="https://img.shields.io/codecov/c/github/tainvecs/garage?flag=apisrv&token=A508HNNW6R&style=for-the-badge&logo=codecov" alt="Codecov" >
   </a>
   <a href="https://github.com/tainvecs/garage/actions/workflows/apisrv_test.yaml" >
