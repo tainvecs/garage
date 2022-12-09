@@ -7,6 +7,9 @@
   <a href="https://github.com/tainvecs/garage/actions/workflows/apisrv_test.yaml" >
     <img src="https://img.shields.io/github/workflow/status/tainvecs/garage/APISRV%20Unit%20Tests?label=Unit%20Tests&style=for-the-badge&logo=github" alt="GitHub Test Workflow Status">
   <a>
+  <a href="https://goreportcard.com/report/github.com/tainvecs/garage/apisrv" >
+    <img src="https://goreportcard.com/badge/github.com/tainvecs/garage/apisrv?style=for-the-badge" alt="Go Report Card" >
+  </a>
   <a href="https://github.com/tainvecs/garage/tree/main/apisrv">
     <img src="https://img.shields.io/github/repo-size/tainvecs/garage?style=for-the-badge" alt="Repo Size">
   </a>
