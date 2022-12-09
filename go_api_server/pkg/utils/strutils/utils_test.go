@@ -41,8 +41,7 @@ func TestStringSlicesXOR(t *testing.T) {
 func TestTrimAllIndent(t *testing.T) {
 
 	ansStr := `{"query":{"term":{"user.id":{"value":"kimchy","boost":1.0}}}}`
-	ansStr, err := strutils.TrimAllIndent(ansStr)
-	assert.NoError(t, err)
+	ansStr = strutils.TrimAllIndent(ansStr)
 
 	testStr := `
         {
@@ -56,8 +55,7 @@ func TestTrimAllIndent(t *testing.T) {
             }
         }
     `
-	resStr, err := strutils.TrimAllIndent(testStr)
-	assert.NoError(t, err)
+	resStr := strutils.TrimAllIndent(testStr)
 
 	assert.Equal(t, ansStr, resStr)
 }

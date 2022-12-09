@@ -23,8 +23,7 @@ func TestQueryToString(t *testing.T) {
             ]
         }
     `
-	ansStr, err := strutils.TrimAllIndent(ansStr)
-	assert.NoError(t, err)
+	ansStr = strutils.TrimAllIndent(ansStr)
 
 	// test es query -> str
 	testESQuery := map[string]interface{}{
@@ -40,8 +39,7 @@ func TestQueryToString(t *testing.T) {
 	}
 	testESQueryStr, err := esdao.QueryToString(testESQuery)
 	assert.NoError(t, err)
-	testESQueryStr, err = strutils.TrimAllIndent(testESQueryStr)
-	assert.NoError(t, err)
+	testESQueryStr = strutils.TrimAllIndent(testESQueryStr)
 
 	assert.Equal(t, ansStr, testESQueryStr)
 }

@@ -35,13 +35,8 @@ func StringSlicesXOR(ss1, ss2 []string) []string {
 }
 
 // TrimAllIndent trim all the indent including space or line break of a string
-func TrimAllIndent(inStr string) (string, error) {
-
-	rgp, err := regexp.Compile(`\s`)
-	if err != nil {
-		return inStr, err
-	}
-
+func TrimAllIndent(inStr string) string {
+	rgp := regexp.MustCompile(`\s`)
 	outStr := rgp.ReplaceAllString(inStr, "")
-	return outStr, nil
+	return outStr
 }

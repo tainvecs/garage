@@ -50,7 +50,7 @@ func (dao *DataAccessObject) Index(
 	// build the request body
 	docData, err := json.Marshal(requestBody)
 	if err != nil {
-		log.Fatalf("Error marshaling document during elasticsearch Indexing: %s", err)
+		log.Printf("Error marshaling document during elasticsearch Indexing: %s", err)
 		return err
 	}
 
@@ -65,12 +65,12 @@ func (dao *DataAccessObject) Index(
 	// perform the request with the client
 	resp, err := indexReq.Do(ctx, dao.Client)
 	if err != nil {
-		log.Fatalf("Error getting response during elasticsearch Indexing: %s", err)
+		log.Printf("Error getting response during elasticsearch Indexing: %s", err)
 		return err
 	}
 	if resp.StatusCode != 200 && resp.StatusCode != 201 {
 		err := fmt.Errorf("elasticsearch index request: status code %d", resp.StatusCode)
-		log.Fatal(err)
+		log.Println(err)
 		return err
 	}
 	defer resp.Body.Close()
@@ -93,7 +93,7 @@ func (dao *DataAccessObject) Search(
 		// es.Client.Search.WithPretty(),
 	)
 	if err != nil {
-		log.Fatalf("Error getting the ES search response: %s", err)
+		log.Printf("Error getting the ES search response: %s", err)
 		return nil, err
 	}
 	if rawResp.StatusCode != 200 {
@@ -107,7 +107,7 @@ func (dao *DataAccessObject) Search(
 		var e map[string]interface{}
 
 		if err := json.NewDecoder(rawResp.Body).Decode(&e); err != nil {
-			log.Fatalf("Error parsing the raw ES search response body: %s", err)
+			log.Printf("Error parsing the raw ES search response body: %s", err)
 			return nil, err
 		}
 
@@ -122,7 +122,7 @@ func (dao *DataAccessObject) Search(
 	// parse raw response from es client
 	var rawResponse RawSearchResponse
 	if err := json.NewDecoder(rawResp.Body).Decode(&rawResponse); err != nil {
-		log.Fatalf("Error parsing the raw ES search response body: %s", err)
+		log.Printf("Error parsing the raw ES search response body: %s", err)
 		return nil, err
 	}
 
@@ -139,7 +139,7 @@ func (dao *DataAccessObject) Update(
 	// build the request body
 	docData, err := json.Marshal(requestBody)
 	if err != nil {
-		log.Fatalf("Error marshaling document during elasticsearch Updating: %s", err)
+		log.Printf("Error marshaling document during elasticsearch Updating: %s", err)
 		return err
 	}
 
@@ -154,12 +154,12 @@ func (dao *DataAccessObject) Update(
 	// perform the request with the client
 	resp, err := updateReq.Do(ctx, dao.Client)
 	if err != nil {
-		log.Fatalf("Error getting response during elasticsearch Updating: %s", err)
+		log.Printf("Error getting response during elasticsearch Updating: %s", err)
 		return err
 	}
 	if resp.StatusCode != 200 {
 		err := fmt.Errorf("elasticsearch update request: status code %d", resp.StatusCode)
-		log.Fatal(err)
+		log.Println(err)
 		return err
 	}
 	defer resp.Body.Close()
@@ -183,12 +183,12 @@ func (dao *DataAccessObject) Delete(
 	// perform the request with the client
 	resp, err := deleteReq.Do(ctx, dao.Client)
 	if err != nil {
-		log.Fatalf("Error getting response during elasticsearch Deleting: %s", err)
+		log.Printf("Error getting response during elasticsearch Deleting: %s", err)
 		return err
 	}
 	if resp.StatusCode != 200 {
 		err := fmt.Errorf("elasticsearch delete request: status code %d", resp.StatusCode)
-		log.Fatal(err)
+		log.Println(err)
 		return err
 	}
 	defer resp.Body.Close()

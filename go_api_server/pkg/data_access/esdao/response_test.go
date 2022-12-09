@@ -31,13 +31,11 @@ func TestRawSearchResponse(t *testing.T) {
             }
         }
     `
-	ansStr, err := strutils.TrimAllIndent(ansStr)
-	assert.NoError(t, err)
+	ansStr = strutils.TrimAllIndent(ansStr)
 
 	respStr, err := esdao.QueryToString(esdao.RawSearchResponse{})
 	assert.NoError(t, err)
-	respStr, err = strutils.TrimAllIndent(respStr)
-	assert.NoError(t, err)
+	respStr = strutils.TrimAllIndent(respStr)
 
 	assert.Equal(t, ansStr, respStr)
 }
@@ -53,13 +51,11 @@ func TestRawSearchHit(t *testing.T) {
             "_score":0
         }
     `
-	ansStr, err := strutils.TrimAllIndent(ansStr)
-	assert.NoError(t, err)
+	ansStr = strutils.TrimAllIndent(ansStr)
 
 	hitStr, err := esdao.QueryToString(esdao.RawSearchHit{})
 	assert.NoError(t, err)
-	hitStr, err = strutils.TrimAllIndent(hitStr)
-	assert.NoError(t, err)
+	hitStr = strutils.TrimAllIndent(hitStr)
 
 	assert.Equal(t, ansStr, hitStr)
 }
