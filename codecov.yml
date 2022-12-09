@@ -1,13 +1,13 @@
 flags:
-  go-api-server:
+  apisrv:
     paths:
-      - go_api_server/
+      - apisrv/
     carryforward: true
 
 coverage:
   status:
     project:
       default: off
-      go-api-server:
-        target: 80%
-        flags: go-api-server
+      apisrv:
+        target: 90%
+        flags: apisrv
