@@ -4,17 +4,12 @@ name: Golang API Server Test
 on:
   push:
     branches:
-      - "**"
-      - "!staging"
-  pull_request:
-    branches:
-      - "**"
-      - "!staging"
+      - "go-api-server/**"
 
 
 defaults:
   run:
-    working-directory: golang_api_server
+    working-directory: go_api_server
 
 
 jobs:
@@ -37,21 +32,12 @@ jobs:
 
     - name: Install Dependencies
       run: |
-        go version
-        go install golang.org/x/lint/golint@latest
+        go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.50.1
 
-    - name: Run go vet
+    - name: Run Lint
       run: |
-        go vet ./...
-
-    - name: Run gofmt
-      run: |
-        bash scripts/go-fmt-check-format.sh
+        golangci-lint run -E gofmt -E stylecheck -E gocritic --verbose --out-format=github-actions
 
     - name: Run Unit Test
       run: |
         go test -v ./...
-
-    - name: Run golint
-      run: |
-        golint ./...
