@@ -4,7 +4,7 @@ name: Golang API Server Test
 on:
   push:
     branches:
-      - "go-api-server/**"
+      - "go-api-server**"
 
 
 defaults:
@@ -13,7 +13,21 @@ defaults:
 
 
 jobs:
+
   test:
+
+    services:
+      elasticsearch:
+        image: elasticsearch:7.17.8
+        env:
+          discovery.type: single-node
+        ports:
+          - 9200:9200
+        options: >-
+          --health-cmd "curl http://localhost:9200/_cluster/health"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 3
 
     strategy:
       matrix:
@@ -23,21 +37,29 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v3
 
-    - name: Setup Go
-      uses: actions/setup-go@v3
-      with:
-        go-version: ${{ matrix.go-version }}
+      - uses: actions/checkout@v3
 
-    - name: Install Dependencies
-      run: |
-        go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.50.1
+      - name: Setup Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: ${{ matrix.go-version }}
 
-    - name: Run Lint
-      run: |
-        golangci-lint run -E gofmt -E stylecheck -E gocritic --verbose --out-format=github-actions
+      - name: Install Dependencies
+        run: |
+          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.50.1
 
-    - name: Run Unit Test
-      run: |
-        go test -v ./...
+      - name: Run Lint
+        run: |
+          golangci-lint run -E gofmt -E stylecheck -E gocritic --verbose --out-format=github-actions
+
+      - name: Run Unit Test
+        env:
+          TEST_REAL: "true"
+          ES_URL: "http://0.0.0.0:9200"
+          ES_UNIT_TEST_INDEX: "unit_test_v1"
+          ES_UNIT_TEST_INDEX_ALIAS: "unit_test_index"
+          ES_UNIT_TEST_SEARCH_ALIAS: "unit_test_search"
+        run: |
+          bash scripts/es-unit_test-set_up.sh
+          go test -v ./...
