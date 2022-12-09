@@ -45,7 +45,7 @@ Each subdirectory is a sandbox for a small testing project.
 | [SQLite] | Notes on creating an SQLite database from a command line or SQL script. |
 
 
-[Golang API Server]: https://github.com/tainvecs/garage/tree/main/golang_api_server
+[Golang API Server]: https://github.com/tainvecs/garage/tree/main/go_api_server
 [Python API Server]: https://github.com/tainvecs/garage/tree/main/python_api_server
 
 [Fail2ban]: https://github.com/tainvecs/garage/tree/main/fail2ban
