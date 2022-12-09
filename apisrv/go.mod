@@ -1,4 +1,4 @@
-module github.com/tainvecs/apisrv
+module github.com/tainvecs/garage/apisrv
 
 go 1.19
 

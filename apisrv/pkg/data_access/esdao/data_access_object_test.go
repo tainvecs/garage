@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/tainvecs/apisrv/pkg/data_access/esdao"
+	"github.com/tainvecs/garage/apisrv/pkg/data_access/esdao"
 )
 
 type testDoc struct {

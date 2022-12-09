@@ -4,8 +4,9 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/tainvecs/apisrv/pkg/data_access/esdao"
-	"github.com/tainvecs/apisrv/pkg/utils/strutils"
+
+	"github.com/tainvecs/garage/apisrv/pkg/data_access/esdao"
+	"github.com/tainvecs/garage/apisrv/pkg/utils/strutils"
 )
 
 func TestRawSearchResponse(t *testing.T) {

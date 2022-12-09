@@ -1,13 +1,13 @@
 # Go API Server
 
 <div>
-  <a href="https://github.com/tainvecs/garage/tree/main/go_api_server" >
-    <img src="https://img.shields.io/codecov/c/github/tainvecs/garage?flag=go-api-server&token=A508HNNW6R&style=for-the-badge&logo=codecov" alt="Codecov" >
+  <a href="https://github.com/tainvecs/garage/tree/main/apisrv" >
+    <img src="https://img.shields.io/codecov/c/github/tainvecs/garage?flag=apisrv&token=A508HNNW6R&style=for-the-badge&logo=codecov" alt="Codecov" >
   </a>
-  <a href="https://github.com/tainvecs/garage/actions/workflows/go_api_server_test.yaml" >
-    <img src="https://img.shields.io/github/workflow/status/tainvecs/garage/Golang%20API%20Server%20Test?label=Unit%20Tests&style=for-the-badge&logo=github" alt="GitHub Test Workflow Status">
+  <a href="https://github.com/tainvecs/garage/actions/workflows/apisrv_test.yaml" >
+    <img src="https://img.shields.io/github/workflow/status/tainvecs/garage/APISRV%20Unit%20Tests?label=Unit%20Tests&style=for-the-badge&logo=github" alt="GitHub Test Workflow Status">
   <a>
-  <a href="https://github.com/tainvecs/garage/tree/main/go_api_server">
+  <a href="https://github.com/tainvecs/garage/tree/main/apisrv">
     <img src="https://img.shields.io/github/repo-size/tainvecs/garage?style=for-the-badge" alt="Repo Size">
   </a>
 </div>

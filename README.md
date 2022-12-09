@@ -8,7 +8,7 @@ Each subdirectory is a sandbox for a small testing project.
 ### API Servers
 | name                | description                                      | keywords                  |
 |:--------------------|:-------------------------------------------------|---------------------------|
-| [Go API Server]     | Go API server implementation using gin and gorm. | `Elasticsearch`           |
+| [apisrv]            | Go API server implementation using gin and gorm. | `Elasticsearch`           |
 | [Python API Server] | Python API server implementation using Flask.    | `Flask` and `Meilisearch` |
 
 ### Applications
@@ -45,7 +45,7 @@ Each subdirectory is a sandbox for a small testing project.
 | [SQLite] | Notes on creating an SQLite database from a command line or SQL script. |
 
 
-[Go API Server]: https://github.com/tainvecs/garage/tree/main/go_api_server
+[apisrv]: https://github.com/tainvecs/garage/tree/main/apisrv
 [Python API Server]: https://github.com/tainvecs/garage/tree/main/python_api_server
 
 [Fail2ban]: https://github.com/tainvecs/garage/tree/main/fail2ban

@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/tainvecs/apisrv/pkg/utils/strutils"
+	"github.com/tainvecs/garage/apisrv/pkg/utils/strutils"
 )
 
 func TestStringSlicesXOR(t *testing.T) {

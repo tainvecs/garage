@@ -1,15 +1,15 @@
-name: Golang API Server Test
+name: APISRV Unit Tests
 
 
 on:
   push:
     branches:
-      - "go-api-server**"
+      - "apisrv**"
 
 
 defaults:
   run:
-    working-directory: "go_api_server"
+    working-directory: "apisrv"
 
 
 permissions:
@@ -71,6 +71,6 @@ jobs:
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
-          flags: go-api-server
+          flags: apisrv
           fail_ci_if_error: true
           verbose: true
