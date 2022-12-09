@@ -9,7 +9,11 @@ on:
 
 defaults:
   run:
-    working-directory: go_api_server
+    working-directory: "go_api_server"
+
+
+permissions:
+  contents: read
 
 
 jobs:
@@ -62,4 +66,11 @@ jobs:
           ES_UNIT_TEST_SEARCH_ALIAS: "unit_test_search"
         run: |
           bash scripts/es-unit_test-set_up.sh
-          go test -v ./...
+          go test -race -covermode=atomic -coverprofile=coverage.out ./...
+
+      - name: Upload Coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          flags: go-api-server
+          fail_ci_if_error: true
+          verbose: true

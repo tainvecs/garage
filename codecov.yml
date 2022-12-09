@@ -1,0 +1,13 @@
+flags:
+  go-api-server:
+    paths:
+      - go_api_server/
+    carryforward: true
+
+coverage:
+  status:
+    project:
+      default: off
+      go-api-server:
+        target: 80%
+        flags: go-api-server
