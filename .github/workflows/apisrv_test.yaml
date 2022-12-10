@@ -66,6 +66,7 @@ jobs:
           ES_UNIT_TEST_SEARCH_ALIAS: "unit_test_search"
         run: |
           bash scripts/es-unit_test-set_up.sh
+          bash scripts/es-news_category-set_up.sh
           go test -race -covermode=atomic -coverprofile=coverage.out ./...
 
       - name: Upload Coverage to Codecov
