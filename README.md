@@ -9,7 +9,7 @@ Each subdirectory is a sandbox for a small testing project.
 
 | name                | description                                      | keywords                  | badges                                                                                                                                                                                                     |
 |:--------------------|:-------------------------------------------------|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [apisrv]            | Go API server implementation using gin and gorm. | `Elasticsearch`           | - </img > <img src="https://goreportcard.com/badge/github.com/tainvecs/garage/apisrv"> </img ></br > - <img src="https://img.shields.io/codecov/c/github/tainvecs/garage?flag=apisrv&token=A508HNNW6R&logo=codecov"> |
+| [apisrv]            | Go API server implementation using gin and gorm. | `Elasticsearch`           | </img > <img src="https://goreportcard.com/badge/github.com/tainvecs/garage/apisrv"> </img ></br > <img src="https://img.shields.io/codecov/c/github/tainvecs/garage?flag=apisrv&token=A508HNNW6R&logo=codecov"> |
 | [Python API Server] | Python API server implementation using Flask.    | `Flask` and `Meilisearch` |                                                                                                                                                                                                            |
 
 
