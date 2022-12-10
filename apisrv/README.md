@@ -30,6 +30,19 @@ Thus, most of the datasets will be a small test set.
 Nevertheless, hoping that it can demonstrate how an API server can be implemented with golang and provide some references.
 
 
+## Features
+- (WIP) Elasticsearch:
+    - search engine provides search services
+    - `elastic/go-elasticsearch/v8`
+- (WIP) PostgreSQL
+    - SQL database for data storage
+    - `go-gorm/gorm`
+- (WIP) API Server
+    - provides an access interface to backend services
+    - `net/http`
+    - `gin-gonic/gin`
+
+
 ## Environment
 - macOS 13.0.1
 - Go 1.19.4
