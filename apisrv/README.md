@@ -13,6 +13,9 @@
   <a href="https://github.com/tainvecs/garage/tags" >
     <img src="https://img.shields.io/github/v/tag/tainvecs/garage?style=for-the-badge" alt="GitHub tag (latest by date)">
   </a>
+  <a href="https://github.com/tainvecs/garage/blob/main/apisrv/go.mod" >
+    <img src="https://img.shields.io/github/go-mod/go-version/tainvecs/garage?filename=apisrv%2Fgo.mod&style=for-the-badge&logo=go" alt="GitHub go.mod Go version">
+  </a>
   <a href="https://github.com/tainvecs/garage/tree/main/apisrv">
     <img src="https://img.shields.io/github/repo-size/tainvecs/garage?style=for-the-badge" alt="Repo Size">
   </a>
