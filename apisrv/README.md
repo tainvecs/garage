@@ -15,7 +15,6 @@
   </a>
   <a href="https://github.com/tainvecs/garage/blob/main/apisrv/go.mod" >
     <img src="https://img.shields.io/github/go-mod/go-version/tainvecs/garage?filename=apisrv%2Fgo.mod&style=for-the-badge&logo=go" alt="GitHub go.mod Go version">
->>>>>>> apisrv/add-news-service
   </a>
 </div>
 <p></p>
