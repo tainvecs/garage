@@ -11,17 +11,34 @@
     <img src="https://goreportcard.com/badge/github.com/tainvecs/garage/apisrv?style=for-the-badge" alt="Go Report Card" >
   </a>
   <a href="https://github.com/tainvecs/garage/tags" >
-    <img src="https://img.shields.io/github/v/tag/tainvecs/garage?style=for-the-badge" alt="GitHub tag (latest by date)">
+    <img src="https://img.shields.io/badge/TAG-APISRV%2Fv0.0.1-blue?style=for-the-badge" alt="GitHub tag (hardcoded)">
   </a>
-  <a href="https://github.com/tainvecs/garage/tree/main/apisrv">
-    <img src="https://img.shields.io/github/repo-size/tainvecs/garage?style=for-the-badge" alt="Repo Size">
+  <a href="https://github.com/tainvecs/garage/blob/main/apisrv/go.mod" >
+    <img src="https://img.shields.io/github/go-mod/go-version/tainvecs/garage?filename=apisrv%2Fgo.mod&style=for-the-badge&logo=go" alt="GitHub go.mod Go version">
+>>>>>>> apisrv/add-news-service
   </a>
 </div>
 <p></p>
 
-This repo is a golang implementation of API server.
-Currently, it is still working in progress, and only support Elasticsearch services.
-In future, the API server might also support other services.
+This repo is a golang implementation of an API server.
+I connect different applications and provide services through APIs. </br >
+
+I am working on this project for testing and practice purposes.
+Thus, most of the datasets will be a small test set.
+Nevertheless, hoping that it can demonstrate how an API server can be implemented with golang and provide some references.
+
+
+## Features
+- (WIP) Elasticsearch:
+    - search engine provides search services
+    - `elastic/go-elasticsearch/v8`
+- (WIP) PostgreSQL
+    - SQL database for data storage
+    - `go-gorm/gorm`
+- (WIP) API Server
+    - provides an access interface to backend services
+    - `net/http`
+    - `gin-gonic/gin`
 
 
 ## Environment

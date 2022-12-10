@@ -5,13 +5,16 @@ Each subdirectory is a sandbox for a small testing project.
 
 ## Implementations
 
-### API Servers
-| name                | description                                      | keywords                  |
-|:--------------------|:-------------------------------------------------|---------------------------|
-| [apisrv]            | Go API server implementation using gin and gorm. | `Elasticsearch`           |
-| [Python API Server] | Python API server implementation using Flask.    | `Flask` and `Meilisearch` |
+- API Servers
 
-### Applications
+| name                | description                                      | keywords                  | badges                                                                                                                                                                                                     |
+|:--------------------|:-------------------------------------------------|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [apisrv]            | Go API server implementation using gin and gorm. | `Elasticsearch`           | </img > <img src="https://goreportcard.com/badge/github.com/tainvecs/garage/apisrv"> </img ></br > <img src="https://img.shields.io/codecov/c/github/tainvecs/garage?flag=apisrv&token=A508HNNW6R&"> |
+| [Python API Server] | Python API server implementation using Flask.    | `Flask` and `Meilisearch` |                                                                                                                                                                                                            |
+
+
+- Applications
+
 | name       | description                                                                                                                                                    |
 |:-----------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [Fail2ban] | - shell scripts for banning IPs from a file with list of IPs or "denyhosts" artifact <br >- an Python script for parsing banned IP from a "denyhosts" artifact |
@@ -19,7 +22,8 @@ Each subdirectory is a sandbox for a small testing project.
 
 ## Resources
 
-### Datasets
+- Datasets
+
 | name            | description                                                                                                                     |
 |:----------------|:--------------------------------------------------------------------------------------------------------------------------------|
 | [News Categroy] | The dataset contains around 200k news headlines from the year 2012 to 2018 obtained from [HuffPost](https://www.huffpost.com/). |
@@ -27,18 +31,21 @@ Each subdirectory is a sandbox for a small testing project.
 
 ## Notes and Testing
 
-### Natural Language Processing
+- Natural Language Processing
+
 | name                 | description                                                         |
 |:---------------------|:--------------------------------------------------------------------|
 | [Keyword Extraction] | - Keyword extraction testing code using KeyBERT<br > - Test dataset |
 
-### Search Engines
+- Search Engines
+
 | name            | description                                                                                                                |
 |:----------------|:---------------------------------------------------------------------------------------------------------------------------|
 | [Elasticsearch] | - Elasticsearch installation and setup scripts<br > - Test dataset and schema                                              |
 | [Meilisearch]   | - Meilisearch installation and setup scripts<br > - Test dataset<br > - Meilisearch Dockerfiles for Debian amd64 and arm64 |
 
-### Databases
+- Databases
+
 | name     | description                                                             |
 |:---------|:------------------------------------------------------------------------|
 | [Redis]  | Notes on Redis installation and command line.                           |
