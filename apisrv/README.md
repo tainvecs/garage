@@ -22,9 +22,12 @@
 </div>
 <p></p>
 
-This repo is a golang implementation of API server.
-Currently, it is still working in progress, and only support Elasticsearch services.
-In future, the API server might also support other services.
+This repo is a golang implementation of an API server.
+I connect different applications and provide services through APIs. </br >
+
+I am working on this project for testing and practice purposes.
+Thus, most of the datasets will be a small test set.
+Nevertheless, hoping that it can demonstrate how an API server can be implemented with golang and provide some references.
 
 
 ## Environment
