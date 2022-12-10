@@ -10,6 +10,9 @@
   <a href="https://goreportcard.com/report/github.com/tainvecs/garage/apisrv" >
     <img src="https://goreportcard.com/badge/github.com/tainvecs/garage/apisrv?style=for-the-badge" alt="Go Report Card" >
   </a>
+  <a href="https://github.com/tainvecs/garage/tags" >
+    <img src="https://img.shields.io/github/v/tag/tainvecs/garage?style=for-the-badge" alt="GitHub tag (latest by date)">
+  </a>
   <a href="https://github.com/tainvecs/garage/tree/main/apisrv">
     <img src="https://img.shields.io/github/repo-size/tainvecs/garage?style=for-the-badge" alt="Repo Size">
   </a>
