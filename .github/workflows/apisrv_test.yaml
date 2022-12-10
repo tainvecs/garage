@@ -4,7 +4,7 @@ name: APISRV Unit Tests
 on:
   push:
     branches:
-      - "apisrv**"
+      - "apisrv/test-workflow"
 
 
 defaults:
