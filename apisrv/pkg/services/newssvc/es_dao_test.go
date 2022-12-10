@@ -40,14 +40,14 @@ func InitESDAO() (newssvc.ESDAO, error) {
 		return nil, errors.New("missing env ES_URL")
 	}
 
-	indexIndex := os.Getenv("ES_NEWS_DOC_INDEX_ALIAS")
+	indexIndex := os.Getenv("ES_UNIT_TEST_INDEX_ALIAS")
 	if len(strings.TrimSpace(indexIndex)) == 0 {
-		return nil, errors.New("missing env ES_NEWS_DOC_INDEX_ALIAS")
+		return nil, errors.New("missing env ES_UNIT_TEST_INDEX_ALIAS")
 	}
 
-	searchIndex := os.Getenv("ES_NEWS_DOC_SEARCH_ALIAS")
+	searchIndex := os.Getenv("ES_UNIT_TEST_SEARCH_ALIAS")
 	if len(strings.TrimSpace(searchIndex)) == 0 {
-		return nil, errors.New("missing env ES_NEWS_DOC_SEARCH_ALIAS")
+		return nil, errors.New("missing env ES_UNIT_TEST_SEARCH_ALIAS")
 	}
 
 	// es dao
