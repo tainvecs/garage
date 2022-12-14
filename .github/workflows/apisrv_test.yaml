@@ -64,8 +64,12 @@ jobs:
           ES_UNIT_TEST_INDEX: "unit_test_v1"
           ES_UNIT_TEST_INDEX_ALIAS: "unit_test_index"
           ES_UNIT_TEST_SEARCH_ALIAS: "unit_test_search"
+          ES_NEWS_DOC_INDEX: "news_docs_v1"
+          ES_NEWS_DOC_INDEX_ALIAS: "news_docs_index"
+          ES_NEWS_DOC_SEARCH_ALIAS: "news_docs_search"
         run: |
           bash scripts/es-unit_test-set_up.sh
+          bash scripts/es-news_category-set_up.sh
           go test -race -covermode=atomic -coverprofile=coverage.out ./...
 
       - name: Upload Coverage to Codecov
