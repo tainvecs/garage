@@ -14,13 +14,11 @@ func NewRouter() *gin.Engine {
 func SetUpRoute(
 	router *gin.Engine,
 	handler *handler.Handler,
-) error {
+) {
 
 	// news doc
 	newsDocGroup := router.Group("/new-docs/v1")
 	{
 		newsDocGroup.GET("/search", handler.NewsDocHandler.GetSearch())
 	}
-
-	return nil
 }
