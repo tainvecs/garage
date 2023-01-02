@@ -5,7 +5,7 @@
     <img src="https://img.shields.io/codecov/c/github/tainvecs/garage?flag=apisrv&token=A508HNNW6R&style=for-the-badge&logo=codecov" alt="Codecov" >
   </a>
   <a href="https://github.com/tainvecs/garage/actions/workflows/apisrv_test.yaml" >
-    <img src="https://img.shields.io/github/workflow/status/tainvecs/garage/APISRV%20Unit%20Tests?label=Unit%20Tests&style=for-the-badge&logo=github" alt="GitHub Test Workflow Status">
+    <img src="https://img.shields.io/github/actions/workflow/status/tainvecs/garage/apisrv_test.yaml?label=Unit%20Tests&style=for-the-badge&logo=github" alt="GitHub Test Workflow Status">
   <a>
   <a href="https://goreportcard.com/report/github.com/tainvecs/garage/apisrv" >
     <img src="https://goreportcard.com/badge/github.com/tainvecs/garage/apisrv?style=for-the-badge" alt="Go Report Card" >
