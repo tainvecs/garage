@@ -67,7 +67,7 @@ Create a new user `username` and password `new_password`
 CREATE ROLE username WITH PASSWORD 'new_password';
 ```
 
-Alternative, you can update the password of user `username` with psql command.
+Alternatively, you can update the password of user `username` with psql command.
 ```
 \password username;
 ```
@@ -85,6 +85,25 @@ ALTER ROLE oldUsername RENAME TO newUsername;
 Drop a user `username`
 ```sql
 DROP USER username;
+```
+
+### Create a Database with psql
+
+Create a new database `dbname`
+```sql
+CREATE DATABASE 'dbname';
+```
+
+Alternatively, you can create the database from command line.
+```bash
+psql postgres -U username -c 'CREATE DATABASE dbname;'
+```
+
+### Create tables with psql
+
+Create tables from a sql script `table_creation_script.sql`
+```bash
+psql -h localhost -U username -d dbname -f table_creation_script.sql
 ```
 
 
