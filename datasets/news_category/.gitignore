@@ -1,3 +1,4 @@
 # ignore json dataset except examples
 *.json
 !*.example*.json
+!*.psql.json
