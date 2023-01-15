@@ -22,10 +22,10 @@ type DataAccessObject struct {
 func New(esURL, esIndexIndex, esSearchIndex string) (*DataAccessObject, error) {
 
 	// new elasticsearch client
-	cfg := elasticsearch.Config{
+	conf := elasticsearch.Config{
 		Addresses: []string{esURL},
 	}
-	client, err := elasticsearch.NewClient(cfg)
+	client, err := elasticsearch.NewClient(conf)
 	if err != nil {
 		return nil, err
 	}
