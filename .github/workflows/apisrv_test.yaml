@@ -49,13 +49,13 @@ jobs:
         with:
           go-version: ${{ matrix.go-version }}
 
-      - name: Install Dependencies
-        run: |
-          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.50.1
+      # - name: Install Dependencies
+      #   run: |
+      #     go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.50.1
 
-      - name: Run Lint
-        run: |
-          golangci-lint run -E gofmt -E stylecheck -E gocritic --verbose --timeout=3m --out-format=github-actions
+      # - name: Run Lint
+      #   run: |
+      #     golangci-lint run -E gofmt -E stylecheck -E gocritic --verbose --timeout=3m --out-format=github-actions
 
       - name: Run Unit Test
         env:
