@@ -28,7 +28,7 @@ func TestApplyQueryConfig(t *testing.T) {
 	// init db client
 	dataDir := os.Getenv("DATA_DIR")
 	client, err := gorm.Open(
-		sqlite.Open(dataDir+"/test-employees.sqlite.db"),
+		sqlite.Open(dataDir+"test-employees.sqlite.db"),
 		&gorm.Config{},
 	)
 	assert.NoError(t, err)
