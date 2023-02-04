@@ -67,7 +67,10 @@ jobs:
           ES_NEWS_DOC_INDEX: "news_docs_v1"
           ES_NEWS_DOC_INDEX_ALIAS: "news_docs_index"
           ES_NEWS_DOC_SEARCH_ALIAS: "news_docs_search"
+          DATA_DIR: "" # /home/runner/work/garage/garage/apisrv/data
         run: |
+          export DATA_DIR="$(realpath ./data)/"
+          env
           bash scripts/es-unit_test-set_up.sh
           bash scripts/es-news_category-set_up.sh
           go test -race -covermode=atomic -coverprofile=coverage.out ./...
