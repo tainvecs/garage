@@ -1,4 +1,4 @@
-package psqldao
+package sqldao
 
 import "gorm.io/gorm"
 
