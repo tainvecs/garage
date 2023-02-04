@@ -69,6 +69,7 @@ jobs:
           ES_NEWS_DOC_SEARCH_ALIAS: "news_docs_search"
           DATA_DIR: "$(realpath ./data)/"
         run: |
+          env
           bash scripts/es-unit_test-set_up.sh
           bash scripts/es-news_category-set_up.sh
           go test -race -covermode=atomic -coverprofile=coverage.out ./...
