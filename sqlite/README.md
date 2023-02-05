@@ -5,8 +5,8 @@
 
 - create a new database from commend line
   ```bash
-  # create new database "employee.db"
-  sqlite3 employee.db
+  # create new database "employees.db"
+  sqlite3 employees.db
 
   # check all the usage commend
   .help
@@ -14,9 +14,9 @@
   # list names and files of attached databases
   .databases
 
-  # create new table "employee"
-  create table employee (
-      employee_id INTEGER PRIMARY KEY,
+  # create new table "employees"
+  create table employees (
+      employees_id INTEGER PRIMARY KEY,
       department VARCHAR(36),
       salary INTEGER
   );
@@ -24,11 +24,11 @@
   # list names of tables matching LIKE pattern TABLE
   .tables ?TABLE?
 
-  # show "employee" schema
-  .schema employee
+  # show "employees" schema
+  .schema employees
 
   # insert data into table
-  insert into employee (department, salary)
+  insert into employees (department, salary)
   values
       ('A', '10'),
       ('A', '20'),
@@ -44,7 +44,7 @@
       ('C', '55');
 
   # select all data
-  select * from employee;
+  select * from employees;
 
   # exit
   .exit
@@ -54,5 +54,5 @@
   - move sql commends to a sql script and create a new database by running the
   script
   ```bash
-  sqlite3 employee.db < init_employee.sql
+  sqlite3 employees.db < init_employees.sql
   ```
