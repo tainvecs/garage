@@ -1,6 +1,13 @@
 package newssvc
 
-import "time"
+import (
+	"context"
+	"time"
+
+	"github.com/tainvecs/garage/apisrv/pkg/data_access/sqldao"
+	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
+)
 
 // PsqlNewsDoc is the struct of news docs stored in PostgreSQL database
 type PsqlNewsDoc struct {
@@ -37,4 +44,33 @@ type PsqlNewsAuthors struct {
 
 func (na *PsqlNewsAuthors) TableName() string {
 	return "news_authors"
+}
+
+// PsqlDAO is the psql data access object for news docs
+type PsqlDAO interface {
+	GetAll(ctx context.Context, queryConf *sqldao.QueryConfig) ([]*PsqlNewsDoc, error)
+}
+
+// psqlDAO use the gorm.DB to access sql database
+type psqlDAO struct {
+	Client *gorm.DB
+}
+
+// NewPsqlDAO instansite a new PsqlDAO
+func NewPsqlDAO(client *gorm.DB) PsqlDAO {
+	return &psqlDAO{Client: client}
+}
+
+func (dao *psqlDAO) GetAll(ctx context.Context, queryConf *sqldao.QueryConfig) ([]*PsqlNewsDoc, error) {
+
+	var docSlice []*PsqlNewsDoc
+
+	err := queryConf.
+		Apply(dao.Client).
+		WithContext(ctx).
+		Model(PsqlNewsDoc{}).
+		Preload(clause.Associations).
+		Find(&docSlice).Error
+
+	return docSlice, err
 }
