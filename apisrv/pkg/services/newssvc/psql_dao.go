@@ -6,19 +6,18 @@ import (
 
 	"github.com/tainvecs/garage/apisrv/pkg/data_access/sqldao"
 	"gorm.io/gorm"
-	"gorm.io/gorm/clause"
 )
 
 // PsqlNewsDoc is the struct of news docs stored in PostgreSQL database
 type PsqlNewsDoc struct {
-	ID          int           `gorm:"column:id;primarykey"`
-	UUID        string        `gorm:"column:uuid"`
-	Link        string        `gorm:"column:link"`
-	Title       string        `gorm:"column:title"`
-	Description string        `gorm:"column:description"`
-	CreatedAt   *time.Time    `gorm:"column:created_at"`
-	Category    string        `gorm:"column:category"`
-	Authors     []*PsqlAuthor `gorm:"many2many:news_authors;joinForeignKey:news_id;joinReferences:authors_id"`
+	ID          int           `gorm:"column:id;primarykey" json:"id"`
+	UUID        string        `gorm:"column:uuid" json:"uuid"`
+	Link        string        `gorm:"column:link" json:"link,omitempty"`
+	Title       string        `gorm:"column:title" json:"title,omitempty"`
+	Description string        `gorm:"column:description" json:"description,omitempty"`
+	CreatedAt   *time.Time    `gorm:"column:created_at" json:"created_at,omitempty"`
+	Category    string        `gorm:"column:category" json:"category,omitempty"`
+	Authors     []*PsqlAuthor `gorm:"many2many:news_authors;joinForeignKey:news_id;joinReferences:authors_id" json:"authors,omitempty"`
 }
 
 func (n *PsqlNewsDoc) TableName() string {
@@ -27,8 +26,8 @@ func (n *PsqlNewsDoc) TableName() string {
 
 // PsqlAuthor is the struct of authors of news docs
 type PsqlAuthor struct {
-	ID   int    `gorm:"column:id;primarykey"`
-	Name string `gorm:"column:name"`
+	ID   int    `gorm:"column:id;primarykey" json:"id"`
+	Name string `gorm:"column:name" json:"name,omitempty"`
 }
 
 func (a *PsqlAuthor) TableName() string {
@@ -37,14 +36,19 @@ func (a *PsqlAuthor) TableName() string {
 
 // PsqlNewsAuthors is the reference table for News and Authors
 type PsqlNewsAuthors struct {
-	ID         int `gorm:"column:id;primarykey"`
-	NewsID     int `gorm:"column:news_id"`
-	Authors_ID int `gorm:"column:authors_id"`
+	ID         int `gorm:"column:id;primarykey" json:"id"`
+	NewsID     int `gorm:"column:news_id" json:"news_id,omitempty"`
+	Authors_ID int `gorm:"column:authors_id" json:"authors_id,omitempty"`
 }
 
 func (na *PsqlNewsAuthors) TableName() string {
 	return "news_authors"
 }
+
+// this is for the PreloadAssociations in sqldao QueryConfig
+const (
+	PsqlNewsAuthorsAssociation = "Authors"
+)
 
 // PsqlDAO is the psql data access object for news docs
 type PsqlDAO interface {
@@ -69,7 +73,6 @@ func (dao *psqlDAO) GetAll(ctx context.Context, queryConf *sqldao.QueryConfig) (
 		Apply(dao.Client).
 		WithContext(ctx).
 		Model(PsqlNewsDoc{}).
-		Preload(clause.Associations).
 		Find(&docSlice).Error
 
 	return docSlice, err
