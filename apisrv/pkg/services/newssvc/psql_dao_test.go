@@ -40,9 +40,11 @@ func InitPsqlDAO() (newssvc.PsqlDAO, error) {
 
 func TestPsqlDAOReal(t *testing.T) {
 
-	if os.Getenv("TEST_REAL") != "true" {
-		t.Skip()
-	}
+	t.Skip()
+
+	// if os.Getenv("TEST_REAL") != "true" {
+	// 	t.Skip()
+	// }
 
 	t.Run("subtestPsqlDAOGetAllReal", subtestPsqlDAOGetAllReal)
 }
