@@ -2,9 +2,7 @@ package newssvc_test
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
-	"fmt"
 	"os"
 	"strings"
 	"testing"
@@ -72,8 +70,8 @@ func subtestPsqlDAOGetAllReal(t *testing.T) {
 	assert.NoError(t, err)
 	assert.NotEmpty(t, docs)
 
-	// print debug
-	mar, err := json.MarshalIndent(docs, "", "\t")
-	assert.NoError(t, err)
-	fmt.Println(string(mar))
+	// // print debug
+	// mar, err := json.MarshalIndent(docs, "", "\t")
+	// assert.NoError(t, err)
+	// fmt.Println(string(mar))
 }

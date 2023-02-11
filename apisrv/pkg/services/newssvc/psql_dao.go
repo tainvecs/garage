@@ -45,7 +45,7 @@ func (na *PsqlNewsAuthors) TableName() string {
 	return "news_authors"
 }
 
-// this is for the PreloadAssociations in sqldao QueryConfig
+// for the PreloadAssociations in sqldao QueryConfig
 const (
 	PsqlNewsAuthorsAssociation = "Authors"
 )
