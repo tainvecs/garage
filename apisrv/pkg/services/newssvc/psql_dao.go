@@ -65,6 +65,7 @@ func NewPsqlDAO(client *gorm.DB) PsqlDAO {
 	return &psqlDAO{Client: client}
 }
 
+// GetAll is the service func for getting all news doc from psql
 func (dao *psqlDAO) GetAll(ctx context.Context, queryConf *sqldao.QueryConfig) ([]*PsqlNewsDoc, error) {
 
 	var docSlice []*PsqlNewsDoc
