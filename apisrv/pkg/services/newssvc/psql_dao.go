@@ -52,7 +52,7 @@ const (
 
 // PsqlDAO is the psql data access object for news docs
 type PsqlDAO interface {
-	GetAll(ctx context.Context, queryConf *sqldao.QueryConfig) ([]*PsqlNewsDoc, error)
+	Get(ctx context.Context, queryConf *sqldao.QueryConfig) ([]*PsqlNewsDoc, error)
 }
 
 // psqlDAO use the gorm.DB to access sql database
@@ -63,18 +63,4 @@ type psqlDAO struct {
 // NewPsqlDAO instansite a new PsqlDAO
 func NewPsqlDAO(client *gorm.DB) PsqlDAO {
 	return &psqlDAO{Client: client}
-}
-
-// GetAll is the service func for getting all news doc from psql
-func (dao *psqlDAO) GetAll(ctx context.Context, queryConf *sqldao.QueryConfig) ([]*PsqlNewsDoc, error) {
-
-	var docSlice []*PsqlNewsDoc
-
-	err := queryConf.
-		Apply(dao.Client).
-		WithContext(ctx).
-		Model(PsqlNewsDoc{}).
-		Find(&docSlice).Error
-
-	return docSlice, err
 }
