@@ -15,7 +15,7 @@ func (dao *psqlDAO) Get(ctx context.Context, queryConf *sqldao.QueryConfig) ([]*
 		Apply(dao.Client).
 		WithContext(ctx).
 		Model(PsqlNewsDoc{}).
-		Order("id desc").
+		Order("id").
 		Find(&docSlice).Error
 
 	return docSlice, err
