@@ -22,7 +22,7 @@ func TestSetUpRoute(t *testing.T) {
 	// test
 	w := httptest.NewRecorder()
 
-	req, err := http.NewRequest(http.MethodGet, "/new-docs/v1/search?query=test", nil)
+	req, err := http.NewRequest(http.MethodGet, "/news-docs/v1/search?query=test", nil)
 	assert.NoError(t, err)
 	router.ServeHTTP(w, req)
 	assert.Equal(t, http.StatusOK, w.Code)

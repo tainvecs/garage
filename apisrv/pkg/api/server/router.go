@@ -17,7 +17,7 @@ func SetUpRoute(
 ) {
 
 	// news doc
-	newsDocGroup := router.Group("/new-docs/v1")
+	newsDocGroup := router.Group("/news-docs/v1")
 	{
 		newsDocGroup.GET("/search", handler.NewsDocHandler.GetSearch())
 	}
