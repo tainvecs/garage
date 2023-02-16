@@ -7,13 +7,13 @@ import (
 	"github.com/tainvecs/garage/apisrv/pkg/services/newssvc"
 )
 
-// SearchRequest is the struct of api get request
+// GetRequest is the struct of api get request
 type GetRequest struct {
 	Page  int `json:"page" form:"page"`
 	Limit int `json:"limit" form:"limit"`
 }
 
-// SearchResponse is the struct of api get response
+// GetResponse is the struct of api get response
 type GetResponse struct {
 	Total int                    `json:"total"`
 	Docs  []*newssvc.PsqlNewsDoc `json:"docs"`
