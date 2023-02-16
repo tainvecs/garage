@@ -2,8 +2,6 @@ package newshdl_test
 
 import (
 	"context"
-	"encoding/json"
-	"fmt"
 	"os"
 	"testing"
 
@@ -35,8 +33,8 @@ func TestNewGetFunc(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Equal(t, resp.Total, 5)
 
-	// print debug
-	mar, err := json.MarshalIndent(resp, "", "\t")
-	assert.NoError(t, err)
-	fmt.Println(string(mar))
+	// // print debug
+	// mar, err := json.MarshalIndent(resp, "", "\t")
+	// assert.NoError(t, err)
+	// fmt.Println(string(mar))
 }
