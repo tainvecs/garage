@@ -12,7 +12,29 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/tainvecs/garage/apisrv/pkg/api/handler/newshdl"
 	"github.com/tainvecs/garage/apisrv/pkg/data_access/esdao"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
+
+func initPsqlClient() (*gorm.DB, error) {
+
+	// check if env missing
+	dsn := os.Getenv("PSQL_DSN")
+	if len(strings.TrimSpace(dsn)) == 0 {
+		return nil, errors.New("missing env PSQL_DSN")
+	}
+
+	// init client
+	client, err := gorm.Open(
+		postgres.Open(dsn),
+		&gorm.Config{},
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	return client, nil
+}
 
 func initESDAO() (*esdao.DataAccessObject, error) {
 
@@ -44,18 +66,27 @@ func initESDAO() (*esdao.DataAccessObject, error) {
 func TestNew(t *testing.T) {
 
 	// init
+	psqlClient, err := initPsqlClient()
+	assert.NoError(t, err)
 	esDAO, err := initESDAO()
 	assert.NoError(t, err)
-	newsHandler := newshdl.New(esDAO)
+	newsHandler := newshdl.New(psqlClient, esDAO)
 
 	// setup
 	gin.SetMode(gin.TestMode)
 	router := gin.Default()
+	router.GET("/test-get", newsHandler.Get())
 	router.GET("/test-search", newsHandler.GetSearch())
 	respRecorder := httptest.NewRecorder()
 
 	// test request
-	req, err := http.NewRequest(http.MethodGet, "/test-search?query=test&page=1&limit=10", nil)
+	req, err := http.NewRequest(http.MethodGet, "/test-get?page=1&limit=10", nil)
+	assert.NoError(t, err)
+	router.ServeHTTP(respRecorder, req)
+	router.Use(newsHandler.Get())
+	assert.Equal(t, 200, respRecorder.Code)
+
+	req, err = http.NewRequest(http.MethodGet, "/test-search?query=test&page=1&limit=10", nil)
 	assert.NoError(t, err)
 	router.ServeHTTP(respRecorder, req)
 	router.Use(newsHandler.GetSearch())

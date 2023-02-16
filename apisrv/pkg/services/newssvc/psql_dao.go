@@ -36,9 +36,9 @@ func (a *PsqlAuthor) TableName() string {
 
 // PsqlNewsAuthors is the reference table for News and Authors
 type PsqlNewsAuthors struct {
-	ID         int `gorm:"column:id;primarykey" json:"id"`
-	NewsID     int `gorm:"column:news_id" json:"news_id,omitempty"`
-	Authors_ID int `gorm:"column:authors_id" json:"authors_id,omitempty"`
+	ID        int `gorm:"column:id;primarykey" json:"id"`
+	NewsID    int `gorm:"column:news_id" json:"news_id,omitempty"`
+	AuthorsID int `gorm:"column:authors_id" json:"authors_id,omitempty"`
 }
 
 func (na *PsqlNewsAuthors) TableName() string {
@@ -52,7 +52,7 @@ const (
 
 // PsqlDAO is the psql data access object for news docs
 type PsqlDAO interface {
-	GetAll(ctx context.Context, queryConf *sqldao.QueryConfig) ([]*PsqlNewsDoc, error)
+	Get(ctx context.Context, queryConf *sqldao.QueryConfig) ([]*PsqlNewsDoc, error)
 }
 
 // psqlDAO use the gorm.DB to access sql database
@@ -63,17 +63,4 @@ type psqlDAO struct {
 // NewPsqlDAO instansite a new PsqlDAO
 func NewPsqlDAO(client *gorm.DB) PsqlDAO {
 	return &psqlDAO{Client: client}
-}
-
-func (dao *psqlDAO) GetAll(ctx context.Context, queryConf *sqldao.QueryConfig) ([]*PsqlNewsDoc, error) {
-
-	var docSlice []*PsqlNewsDoc
-
-	err := queryConf.
-		Apply(dao.Client).
-		WithContext(ctx).
-		Model(PsqlNewsDoc{}).
-		Find(&docSlice).Error
-
-	return docSlice, err
 }
