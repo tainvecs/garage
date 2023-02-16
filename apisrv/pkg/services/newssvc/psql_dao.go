@@ -36,9 +36,9 @@ func (a *PsqlAuthor) TableName() string {
 
 // PsqlNewsAuthors is the reference table for News and Authors
 type PsqlNewsAuthors struct {
-	ID         int `gorm:"column:id;primarykey" json:"id"`
-	NewsID     int `gorm:"column:news_id" json:"news_id,omitempty"`
-	Authors_ID int `gorm:"column:authors_id" json:"authors_id,omitempty"`
+	ID        int `gorm:"column:id;primarykey" json:"id"`
+	NewsID    int `gorm:"column:news_id" json:"news_id,omitempty"`
+	AuthorsID int `gorm:"column:authors_id" json:"authors_id,omitempty"`
 }
 
 func (na *PsqlNewsAuthors) TableName() string {
