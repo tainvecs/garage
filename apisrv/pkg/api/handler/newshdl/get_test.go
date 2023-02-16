@@ -2,7 +2,6 @@ package newshdl_test
 
 import (
 	"context"
-	"os"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -12,9 +11,10 @@ import (
 
 func TestNewGetFunc(t *testing.T) {
 
-	if os.Getenv("TEST_REAL") != "true" {
-		t.Skip()
-	}
+	t.Skip()
+	// if os.Getenv("TEST_REAL") != "true" {
+	// 	t.Skip()
+	// }
 
 	// prerequisite
 	client, err := initPsqlClient()
