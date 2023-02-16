@@ -1,10 +1,10 @@
-CREATE TABLE employee (
+CREATE TABLE employees (
     employee_id INTEGER PRIMARY KEY,
     department VARCHAR(36),
     salary INTEGER
 );
 
-INSERT INTO employee (department, salary)
+INSERT INTO employees (department, salary)
 VALUES
     ('A', '10'),
     ('A', '20'),
