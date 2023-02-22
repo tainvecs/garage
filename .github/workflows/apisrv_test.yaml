@@ -26,23 +26,25 @@ jobs:
         image: postgres
         env:
           POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
 
-      elasticsearch:
-        image: elasticsearch:7.17.8
-        env:
-          discovery.type: single-node
-        ports:
-          - 9200:9200
-        options: >-
-          --health-cmd "curl http://localhost:9200/_cluster/health"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 3
+      # elasticsearch:
+      #   image: elasticsearch:7.17.8
+      #   env:
+      #     discovery.type: single-node
+      #   ports:
+      #     - 9200:9200
+      #   options: >-
+      #     --health-cmd "curl http://localhost:9200/_cluster/health"
+      #     --health-interval 10s
+      #     --health-timeout 5s
+      #     --health-retries 3
 
     strategy:
       matrix:
@@ -71,7 +73,7 @@ jobs:
       - name: Run Unit Test
         env:
           TEST_REAL: "true"
-          POSTGRES_HOST: "localhost"
+          POSTGRES_HOST: "http://0.0.0.0"
           POSTGRES_PORT: "5432"
           POSTGRES_USER: "postgres"
           POSTGRES_NEWS_DB: "news"
