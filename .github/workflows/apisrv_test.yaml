@@ -21,6 +21,19 @@ jobs:
   test:
 
     services:
+
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
       elasticsearch:
         image: elasticsearch:7.17.8
         env:
@@ -60,6 +73,11 @@ jobs:
       - name: Run Unit Test
         env:
           TEST_REAL: "true"
+          POSTGRES_HOST: "0.0.0.0"
+          POSTGRES_PORT: "5432"
+          POSTGRES_USER: "postgres"
+          POSTGRES_NEWS_DB: "news"
+          PGPASSWORD: "postgres"
           ES_URL: "http://0.0.0.0:9200"
           ES_UNIT_TEST_INDEX: "unit_test_v1"
           ES_UNIT_TEST_INDEX_ALIAS: "unit_test_index"
@@ -70,7 +88,14 @@ jobs:
           DATA_DIR: "" # /home/runner/work/garage/garage/apisrv/data
         run: |
           export DATA_DIR="$(realpath ./data)/"
+          export PSQL_DSN="host=$POSTGRES_HOST port=$POSTGRES_PORT dbname=$POSTGRES_NEWS_DB user=$POSTGRES_USER"
           env
+
+          bash scripts/psql-unit_test-set_up.sh
+
+          cd /home/runner/work/garage/garage/apisrv/pkg/services/newssvc
+          go test -run TestPsqlDAOReal
+
           bash scripts/es-unit_test-set_up.sh
           bash scripts/es-news_category-set_up.sh
           go test -race -covermode=atomic -coverprofile=coverage.out ./...
