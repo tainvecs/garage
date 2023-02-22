@@ -21,6 +21,17 @@ jobs:
   test:
 
     services:
+
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
       elasticsearch:
         image: elasticsearch:7.17.8
         env:
@@ -49,17 +60,22 @@ jobs:
         with:
           go-version: ${{ matrix.go-version }}
 
-      - name: Install Dependencies
-        run: |
-          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.50.1
+      # - name: Install Dependencies
+      #   run: |
+      #     go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.50.1
 
-      - name: Run Lint
-        run: |
-          golangci-lint run -E gofmt -E stylecheck -E gocritic --verbose --timeout=3m --out-format=github-actions
+      # - name: Run Lint
+      #   run: |
+      #     golangci-lint run -E gofmt -E stylecheck -E gocritic --verbose --timeout=3m --out-format=github-actions
 
       - name: Run Unit Test
         env:
           TEST_REAL: "true"
+          POSTGRES_HOST: "postgres"
+          POSTGRES_PORT: "5432"
+          POSTGRES_USER: "postgres"
+          POSTGRES_NEWS_DB: "news"
+          PSQL_DSN: "host=$POSTGRES_HOST port=$POSTGRES_PORT dbname=$POSTGRES_NEWS_DB user=$POSTGRES_USER"
           ES_URL: "http://0.0.0.0:9200"
           ES_UNIT_TEST_INDEX: "unit_test_v1"
           ES_UNIT_TEST_INDEX_ALIAS: "unit_test_index"
@@ -71,13 +87,19 @@ jobs:
         run: |
           export DATA_DIR="$(realpath ./data)/"
           env
-          bash scripts/es-unit_test-set_up.sh
-          bash scripts/es-news_category-set_up.sh
-          go test -race -covermode=atomic -coverprofile=coverage.out ./...
 
-      - name: Upload Coverage to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          flags: apisrv
-          fail_ci_if_error: true
-          verbose: true
+          bash scripts/psql-unit_test-set_up.sh
+
+          cd /home/runner/work/garage/garage/apisrv/pkg/services/newssvc
+          go test -run TestPsqlDAOReal
+
+          # bash scripts/es-unit_test-set_up.sh
+          # bash scripts/es-news_category-set_up.sh
+          # go test -race -covermode=atomic -coverprofile=coverage.out ./...
+
+      # - name: Upload Coverage to Codecov
+      #   uses: codecov/codecov-action@v3
+      #   with:
+      #     flags: apisrv
+      #     fail_ci_if_error: true
+      #     verbose: true

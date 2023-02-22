@@ -1,8 +1,6 @@
 package sqldao_test
 
 import (
-	"encoding/json"
-	"fmt"
 	"os"
 	"testing"
 
@@ -48,8 +46,8 @@ func TestApplyQueryConfig(t *testing.T) {
 		Error
 	assert.NoError(t, err)
 
-	// print debug
-	mar, err := json.MarshalIndent(eSlice, "", "\t")
-	assert.NoError(t, err)
-	fmt.Println(string(mar))
+	// // print debug
+	// mar, err := json.MarshalIndent(eSlice, "", "\t")
+	// assert.NoError(t, err)
+	// fmt.Println(string(mar))
 }
