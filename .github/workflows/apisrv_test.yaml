@@ -34,17 +34,17 @@ jobs:
           --health-timeout 5s
           --health-retries 5
 
-      # elasticsearch:
-      #   image: elasticsearch:7.17.8
-      #   env:
-      #     discovery.type: single-node
-      #   ports:
-      #     - 9200:9200
-      #   options: >-
-      #     --health-cmd "curl http://localhost:9200/_cluster/health"
-      #     --health-interval 10s
-      #     --health-timeout 5s
-      #     --health-retries 3
+      elasticsearch:
+        image: elasticsearch:7.17.8
+        env:
+          discovery.type: single-node
+        ports:
+          - 9200:9200
+        options: >-
+          --health-cmd "curl http://localhost:9200/_cluster/health"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 3
 
     strategy:
       matrix:
@@ -62,13 +62,13 @@ jobs:
         with:
           go-version: ${{ matrix.go-version }}
 
-      # - name: Install Dependencies
-      #   run: |
-      #     go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.50.1
+      - name: Install Dependencies
+        run: |
+          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.50.1
 
-      # - name: Run Lint
-      #   run: |
-      #     golangci-lint run -E gofmt -E stylecheck -E gocritic --verbose --timeout=3m --out-format=github-actions
+      - name: Run Lint
+        run: |
+          golangci-lint run -E gofmt -E stylecheck -E gocritic --verbose --timeout=3m --out-format=github-actions
 
       - name: Run Unit Test
         env:
@@ -96,13 +96,13 @@ jobs:
           cd /home/runner/work/garage/garage/apisrv/pkg/services/newssvc
           go test -run TestPsqlDAOReal
 
-          # bash scripts/es-unit_test-set_up.sh
-          # bash scripts/es-news_category-set_up.sh
-          # go test -race -covermode=atomic -coverprofile=coverage.out ./...
+          bash scripts/es-unit_test-set_up.sh
+          bash scripts/es-news_category-set_up.sh
+          go test -race -covermode=atomic -coverprofile=coverage.out ./...
 
-      # - name: Upload Coverage to Codecov
-      #   uses: codecov/codecov-action@v3
-      #   with:
-      #     flags: apisrv
-      #     fail_ci_if_error: true
-      #     verbose: true
+      - name: Upload Coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          flags: apisrv
+          fail_ci_if_error: true
+          verbose: true
