@@ -93,9 +93,6 @@ jobs:
 
           bash scripts/psql-unit_test-set_up.sh
 
-          cd /home/runner/work/garage/garage/apisrv/pkg/services/newssvc
-          go test -run TestPsqlDAOReal
-
           bash scripts/es-unit_test-set_up.sh
           bash scripts/es-news_category-set_up.sh
           go test -race -covermode=atomic -coverprofile=coverage.out ./...
