@@ -2,9 +2,14 @@ package handler
 
 import (
 	"github.com/tainvecs/garage/apisrv/pkg/api/handler/newshdl"
-	"github.com/tainvecs/garage/apisrv/pkg/data_access/esdao"
-	"gorm.io/gorm"
+	"github.com/tainvecs/garage/apisrv/pkg/services/newssvc"
 )
+
+// Resources needed by an handler
+type Resources struct {
+	NewsPsqlDAO newssvc.PsqlDAO
+	NewsESDAO   newssvc.ESDAO
+}
 
 // Handler for api server
 type Handler struct {
@@ -12,9 +17,9 @@ type Handler struct {
 }
 
 // NewHandler create a new api server Handler
-func NewHandler(psqlClient *gorm.DB, esDAO *esdao.DataAccessObject) *Handler {
+func NewHandler(resources *Resources) *Handler {
 
-	newsDocHandler := newshdl.New(psqlClient, esDAO)
+	newsDocHandler := newshdl.New(resources.NewsPsqlDAO, resources.NewsESDAO)
 
 	return &Handler{
 		NewsDocHandler: newsDocHandler,

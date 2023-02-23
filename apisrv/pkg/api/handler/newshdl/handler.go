@@ -5,9 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/tainvecs/garage/apisrv/pkg/api/middleware"
-	"github.com/tainvecs/garage/apisrv/pkg/data_access/esdao"
 	"github.com/tainvecs/garage/apisrv/pkg/services/newssvc"
-	"gorm.io/gorm"
 )
 
 // Handler of news docs service
@@ -17,14 +15,10 @@ type Handler struct {
 }
 
 // New func creates a news docs service handler
-func New(psqlClient *gorm.DB, esDAO *esdao.DataAccessObject) *Handler {
-
-	svcPsqlDAO := newssvc.NewPsqlDAO(psqlClient)
-	svcESDAO := newssvc.NewESDAO(esDAO)
-
+func New(psqlDAO newssvc.PsqlDAO, esDAO newssvc.ESDAO) *Handler {
 	return &Handler{
-		GetFunc:    NewGetFunc(svcPsqlDAO),
-		SearchFunc: NewSearchFunc(svcESDAO),
+		GetFunc:    NewGetFunc(psqlDAO),
+		SearchFunc: NewSearchFunc(esDAO),
 	}
 }
 

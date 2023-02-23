@@ -88,7 +88,7 @@ jobs:
           DATA_DIR: "" # /home/runner/work/garage/garage/apisrv/data
         run: |
           export DATA_DIR="$(realpath ./data)/"
-          export PSQL_DSN="host=$POSTGRES_HOST port=$POSTGRES_PORT dbname=$POSTGRES_NEWS_DB user=$POSTGRES_USER"
+          export PSQL_NEWS_DSN="host=$POSTGRES_HOST port=$POSTGRES_PORT dbname=$POSTGRES_NEWS_DB user=$POSTGRES_USER"
           env
 
           bash scripts/psql-unit_test-set_up.sh
