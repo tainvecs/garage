@@ -24,9 +24,9 @@ func initPsql() {
 	}
 
 	// check if env missing
-	dsn := os.Getenv("PSQL_DSN")
+	dsn := os.Getenv("PSQL_NEWS_DSN")
 	if len(strings.TrimSpace(dsn)) == 0 {
-		panic(errors.New("missing env PSQL_DSN"))
+		panic(errors.New("missing env PSQL_NEWS_DSN"))
 	}
 
 	// init client

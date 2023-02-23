@@ -12,6 +12,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/tainvecs/garage/apisrv/pkg/api/handler/newshdl"
 	"github.com/tainvecs/garage/apisrv/pkg/data_access/esdao"
+	"github.com/tainvecs/garage/apisrv/pkg/services/newssvc"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -19,9 +20,9 @@ import (
 func initPsqlClient() (*gorm.DB, error) {
 
 	// check if env missing
-	dsn := os.Getenv("PSQL_DSN")
+	dsn := os.Getenv("PSQL_NEWS_DSN")
 	if len(strings.TrimSpace(dsn)) == 0 {
-		return nil, errors.New("missing env PSQL_DSN")
+		return nil, errors.New("missing env PSQL_NEWS_DSN")
 	}
 
 	// init client
@@ -68,9 +69,11 @@ func TestNew(t *testing.T) {
 	// init
 	psqlClient, err := initPsqlClient()
 	assert.NoError(t, err)
+	svcPsqlDAO := newssvc.NewPsqlDAO(psqlClient)
 	esDAO, err := initESDAO()
+	svcESDAO := newssvc.NewESDAO(esDAO)
 	assert.NoError(t, err)
-	newsHandler := newshdl.New(psqlClient, esDAO)
+	newsHandler := newshdl.New(svcPsqlDAO, svcESDAO)
 
 	// setup
 	gin.SetMode(gin.TestMode)
