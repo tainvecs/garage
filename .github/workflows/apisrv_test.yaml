@@ -41,6 +41,7 @@ jobs:
         ports:
           - 9200:9200
         options: >-
+          -e "xpack.security.enabled=false"
           --health-cmd "curl http://localhost:9200/_cluster/health"
           --health-interval 10s
           --health-timeout 5s
