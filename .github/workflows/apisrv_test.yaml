@@ -35,7 +35,7 @@ jobs:
           --health-retries 5
 
       elasticsearch:
-        image: elasticsearch:7.17.8
+        image: elasticsearch:8.5.3
         env:
           discovery.type: single-node
         ports:
