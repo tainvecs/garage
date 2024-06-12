@@ -99,8 +99,9 @@ jobs:
           go test -race -covermode=atomic -coverprofile=coverage.out ./...
 
       - name: Upload Coverage to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         with:
           flags: apisrv
           fail_ci_if_error: true
           verbose: true
+          token: ${{ secrets.CODECOV_TOKEN }} # required
