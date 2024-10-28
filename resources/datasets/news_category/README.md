@@ -6,10 +6,16 @@ Dataset](https://www.kaggle.com/datasets/rmisra/news-category-dataset).
 It contains around 200k news headlines from the year 2012 to 2018 obtained from
 [HuffPost](https://www.huffpost.com/).
 
-Check `process_dataset.ipynb` for data processing detail.
 
+## Preprocessing
+- `resources/datasets/news_category/preprocess`
 
-## Raw Data
+- Check `process_dataset.ipynb` for data preprocessing detail.
+  - split authors string into list
+  - extract news_id from url
+  - update keys' names
+
+- Raw Data
 ```json
 {
     "link":"https://www.huffingtonpost.com/entry/amazon-prime-what-to-watch_us_5b044625e4b0c0b8b23ec14f",
@@ -21,12 +27,7 @@ Check `process_dataset.ipynb` for data processing detail.
 }
 ```
 
-
-## Processed Data
-- split authors string into list
-- extract news_id from url
-- update keys' names
-
+- Processed Data
 ```json
 {
     "uuid":"8a34bbab-125a-4beb-b9b0-5b9918e83a78",
@@ -43,7 +44,10 @@ Check `process_dataset.ipynb` for data processing detail.
 ```
 
 
-## Processed Data for Elasticsearch Indexing
+## Elasticsearch
+- `resources/datasets/news_category/es`
+
+- Processed Data for Indexing
 ```json
 {
     "index":{
@@ -62,6 +66,24 @@ Check `process_dataset.ipynb` for data processing detail.
     ],
     "category":"ENTERTAINMENT"
 }
+```
+
+
+## PostgreSQL
+- `resources/datasets/news_category/psql`
+
+- Check schema file `schema-news_category.psql.sql` for more detail.
+
+- Processed Data for Indexing
+```sql
+INSERT INTO "news" ("id", "uuid", "link", "title", "description", "created_at", "category") VALUES
+(8, '8a34bbab-125a-4beb-b9b0-5b9918e83a78', 'https://www.huffingtonpost.com/entry/amazon-prime-what-to-watch_us_5b044625e4b0c0b8b23ec14f', 'What To Watch On Amazon Prime That’s New This Week', 'There''s a great mini-series joining this week.', '2018-05-26', 'ENTERTAINMENT');
+
+INSERT INTO "authors" ("id", "name") VALUES
+(8, 'Todd Van Luling');
+
+INSERT INTO "news_authors" ("news_id", "authors_id") VALUES
+(8, 8);
 ```
 
 
