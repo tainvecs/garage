@@ -1,10 +1,7 @@
 # News Category Dataset
 
-The test data is forked from [News Category
-Dataset](https://www.kaggle.com/datasets/rmisra/news-category-dataset).
-
-It contains around 200k news headlines from the year 2012 to 2018 obtained from
-[HuffPost](https://www.huffpost.com/).
+The test data is derived from [News Category Dataset].
+This dataset contains approximately 200,000 news headlines collected between 2012 and 2018 from [HuffPost].
 
 
 ## Preprocessing
@@ -88,4 +85,8 @@ INSERT INTO "news_authors" ("news_id", "authors_id") VALUES
 
 
 ## Reference
-- [News Category Dataset](https://www.kaggle.com/datasets/rmisra/news-category-dataset)
+- [News Category Dataset]
+
+
+[HuffPost]: https://www.huffpost.com/
+[News Category Dataset]: https://www.kaggle.com/datasets/rmisra/news-category-dataset
