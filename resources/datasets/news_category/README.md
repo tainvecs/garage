@@ -7,10 +7,10 @@ This dataset contains approximately 200,000 news headlines collected between 201
 ## Preprocessing
 - `resources/datasets/news_category/preprocess`
 
-- Check `process_dataset.ipynb` for data preprocessing detail.
-  - split authors string into list
-  - extract news_id from url
-  - update keys' names
+- For detailed data preprocessing steps, refer to `process_dataset.ipynb`. The key steps include:
+  - Splitting the authors string into a list of individual authors.
+  - Extracting the `news_id` from the article URLs.
+  - Renaming and updating key names.
 
 - Raw Data
 ```json
