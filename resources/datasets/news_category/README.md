@@ -1,6 +1,6 @@
 # News Category Dataset
 
-The test data is derived from [News Category Dataset].
+The test data is derived from [News Category Dataset].<br />
 This dataset contains approximately 200,000 news headlines collected between 2012 and 2018 from [HuffPost].
 
 
